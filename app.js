@@ -76,13 +76,13 @@ async function loadAll() {
 }
 
 // ---------- rendering ----------
-function renderItem(it, date, tab, f) {
+function renderItem(it, date, tab, f, size) {
   const tag = it.tag ? `<span class="pill ${it.tag === 'Confirmed' ? 'ok' : 'rep'}">${esc(it.tag)}</span>` : '';
   const links = (it.links || []).map(l => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`).join('');
   const open = it.url ? `<a href="${esc(it.url)}" target="_blank" rel="noopener">Open ↗</a>` : '';
   const topics = (it.topics || []).map(t =>
     `<a class="topic ${f.topic.toLowerCase() === t.toLowerCase() ? 'on' : ''}" href="${buildHash(date, tab, {...f, topic: f.topic.toLowerCase() === t.toLowerCase() ? '' : t})}">${esc(t)}</a>`).join('');
-  return `<div class="card">
+  return `<div class="card ${size || ''}">
     <h3>${md(it.title)}${it.meta ? `<span class="meta">${esc(it.meta)}</span>` : ''}</h3>
     ${it.summary ? `<p>${md(it.summary)}</p>` : ''}
     ${it.note ? `<p class="note"><strong>What you can do:</strong> ${md(it.note)}</p>` : ''}
@@ -94,10 +94,17 @@ function renderTiers(tab, date, f, filtering) {
   return tab.tiers.map(tr => {
     const items = tr.items.filter(it => matches(it, f));
     if (filtering && !items.length) return '';
-    return `<h2 class="tier ${tierClass(tr.name)}">${esc(tr.name)}</h2>` +
-      (items.length ? `<div class="group">${items.map(it => renderItem(it, date, tab.id, f)).join('')}</div>`
-                    : `<div class="none">Nothing ${cache[date].kind === 'weekly' ? 'this week' : 'today'}</div>`);
+    return tierSection(tr.name, tierClass(tr.name), items.length
+      ? mosaic(items, date, tab.id, f)
+      : `<div class="none">Nothing ${cache[date].kind === 'weekly' ? 'this week' : 'today'}</div>`);
   }).join('');
+}
+function tierSection(label, cls, inner) {
+  return `<section class="tier-sec ${cls}"><div class="tier-label"><span>${label}</span></div><div class="mosaic">${inner}</div></section>`;
+}
+function mosaic(items, date, tabId, f) {
+  const n = items.length;
+  return items.map((it, i) => renderItem(it, date, tabId, f, n === 1 ? 'full' : n === 2 ? 'half' : i === 0 ? 'big' : 'small')).join('');
 }
 
 function topicChips(posts, tabId, date, f) {
@@ -119,7 +126,7 @@ async function renderPost(post, tabId, f) {
   const filtering = !!(f.q || f.topic);
   const tabbar = post.tabs.map(t => {
     const n = t.tiers.reduce((s, x) => s + x.items.length, 0);
-    return `<a href="${buildHash(post.date, t.id, f)}" class="${t === tab ? 'active' : ''}">${esc(t.name)}<span class="n">${n}</span></a>`;
+    return `<a href="${buildHash(post.date, t.id, f)}" data-tab="${t.id}" class="${t === tab ? 'active' : ''}">${esc(t.name)}<span class="n">${n}</span></a>`;
   }).join('');
 
   let body, chips;
@@ -130,8 +137,7 @@ async function renderPost(post, tabId, f) {
       const t = p.tabs.find(x => x.id === tabId); if (!t) return '';
       const items = t.tiers.flatMap(tr => tr.items.filter(it => matches(it, f)));
       if (!items.length) return '';
-      return `<h2 class="tier day"><a href="#/${p.date}/${tabId}">${fmtDate(p.date)}${p.kind === 'weekly' ? ' · Weekly' : ''}</a></h2>` +
-        `<div class="group">${items.map(it => renderItem(it, p.date, tabId, f)).join('')}</div>`;
+      return tierSection(`<a href="#/${p.date}/${tabId}">${fmtDate(p.date, {day:'numeric', month:'short'})}${p.kind === 'weekly' ? '<br>Weekly' : ''}</a>`, 'day', mosaic(items, p.date, tabId, f));
     }).join('') || `<div class="none">No matches on any day.</div>`;
   } else {
     chips = topicChips([post], tabId, post.date, f);
@@ -145,14 +151,14 @@ async function renderPost(post, tabId, f) {
       ${post.summary ? `<p class="one"><strong>In one sentence:</strong> ${md(post.summary)}</p>` : ''}
       ${post.window ? `<div class="window">${esc(post.window)}</div>` : ''}
     </div>
-    <nav class="tabbar">${tabbar}</nav>
+    <nav class="tabbar" data-tab="${tabId}">${tabbar}</nav>
     <div class="filters">
       <input id="q" type="search" placeholder="Search in ${esc(tab.name)}…" value="${esc(f.q)}">
       <label class="all"><input id="all" type="checkbox" ${f.all ? 'checked' : ''}> all days</label>
       ${filtering ? `<a class="clear" href="#/${post.date}/${tabId}">clear</a>` : ''}
     </div>
     <div class="chips">${chips}</div>
-    <section class="panel">${body}
+    <section class="panel" data-tab="${tabId}">${body}
       ${!filtering && post.footer ? `<footer class="src">${md(post.footer)}</footer>` : ''}
     </section>`;
 

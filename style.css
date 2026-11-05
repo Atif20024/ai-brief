@@ -11,7 +11,7 @@ a{color:var(--accent);text-decoration:none}
 a:hover{text-decoration:underline}
 button,input,select{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.wrap{max-width:760px;margin:0 auto;padding:0 20px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
 .muted{color:var(--muted)}
 
 /* ---- top bar (translucent material) ---- */
@@ -28,7 +28,7 @@ button,input,select{font:inherit;color:inherit}
 .archive-link{font-size:14px;font-weight:500;color:var(--accent)}
 
 /* ---- post header ---- */
-.post-head{padding:30px 0 18px}
+.post-head{padding:30px 0 18px;max-width:760px}
 .post-head .kind{display:inline-block;font-size:12px;font-weight:600;color:var(--accent);background:var(--accent-soft);border-radius:999px;padding:3px 10px;margin-bottom:12px}
 .post-head h1{font-size:28px;line-height:1.2;letter-spacing:-.02em;font-weight:700;margin:0 0 10px}
 .post-head .one{margin:0;font-size:16px;color:var(--text)}
@@ -62,31 +62,61 @@ button,input,select{font:inherit;color:inherit}
 .chip.on .n{color:rgba(255,255,255,.65)}
 .topic{padding:2px 8px;font-size:11.5px;background:var(--bg)}
 
-/* ---- tiers as grouped lists ---- */
-.panel{padding:6px 0 72px}
-h2.tier{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:var(--muted);margin:22px 0 8px 2px}
-h2.tier::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--good)}
-h2.tier.must{color:var(--text)} h2.tier.must::before{background:var(--must)}
-h2.tier.should{color:var(--text)} h2.tier.should::before{background:var(--should)}
-h2.tier.day{color:var(--accent)} h2.tier.day::before{background:var(--accent)}
-h2.tier.day a{color:inherit}
-.group{background:var(--surface);border-radius:var(--r);box-shadow:0 0 0 .5px var(--line)}
-.card{padding:16px 18px}
-.card + .card{border-top:1px solid var(--line)}
-.card h3{font-size:16px;font-weight:600;line-height:1.35;margin:0 0 6px;letter-spacing:-.005em}
-.card h3 .meta{color:var(--muted);font-weight:400;font-size:13px;margin-left:8px;white-space:nowrap}
+/* ---- per-tab accent ---- */
+[data-tab=research]{--tab:#6E3FD9;--tab-soft:#EFE8FB}
+[data-tab=repos]{--tab:#1B8A5A;--tab-soft:#E3F5EB}
+[data-tab=news]{--tab:#D6336C;--tab-soft:#FBE4EC}
+[data-tab=models]{--tab:#0A5BD8;--tab-soft:#E4EDFC}
+[data-tab=learn]{--tab:#0E8C8C;--tab-soft:#E0F4F4}
+[data-tab=voices]{--tab:#D97706;--tab-soft:#FDF0DC}
+[data-tab=week]{--tab:#1D1D1F;--tab-soft:#ECECEF}
+[data-tab=catchup]{--tab:#B7791F;--tab-soft:#FBF1DC}
+.tabbar a.active{color:var(--tab)}
+.tabbar a.active .n{color:var(--tab);opacity:.7}
+.post-head .kind{color:var(--accent)}
+
+/* ---- tier bands: label left, mosaic right ---- */
+.panel{padding:8px 0 72px}
+.tier-sec{display:grid;grid-template-columns:minmax(120px,20%) 1fr;gap:14px;padding:16px 16px 16px 0;margin:12px 0;border-radius:18px;background:var(--band)}
+.tier-sec.must{--band:#FFF0EA;--ink:#C2410C}
+.tier-sec.should{--band:#FFF6E0;--ink:#A16207}
+.tier-sec.{--band:#EEF2F7;--ink:#52637A}
+.tier-sec:not(.must):not(.should):not(.day){--band:#EDF1F6;--ink:#52637A}
+.tier-sec.day{--band:var(--tab-soft);--ink:var(--tab)}
+.tier-label{padding:4px 0 0 18px;color:var(--ink);font-weight:700;font-size:22px;line-height:1.1;letter-spacing:-.02em}
+.tier-label a{color:inherit}
+.mosaic{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-flow:dense;gap:10px}
+.card{background:var(--surface);border-radius:14px;padding:16px 18px;box-shadow:0 1px 2px rgba(0,0,0,.05),0 0 0 .5px rgba(0,0,0,.05);border-top:4px solid var(--ink);display:flex;flex-direction:column;transition:transform .3s var(--spring),box-shadow .2s}
+.card:hover{transform:translateY(-2px);box-shadow:0 8px 20px -8px rgba(0,0,0,.18),0 0 0 .5px rgba(0,0,0,.05)}
+.card.big{grid-column:span 4}
+.card.small{grid-column:span 2}
+.card.half{grid-column:span 3}
+.card.full{grid-column:span 6}
+.card.half p{font-size:14.5px}
+.card h3{font-size:17px;font-weight:650;line-height:1.3;margin:0 0 8px;letter-spacing:-.01em}
+.card.small h3{font-size:14.5px}
+.card h3 .meta{display:block;color:var(--muted);font-weight:400;font-size:12.5px;margin-top:2px}
 .card p{margin:0 0 8px;font-size:15px;color:#3A3A3C}
+.card.small p{font-size:13.5px;display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical;overflow:hidden}
+.card.small p.note{display:none}
 .card p.note{color:var(--muted);font-size:14px}
 .card p.note strong{color:var(--text);font-weight:600}
 .card code{background:var(--bg);border-radius:5px;padding:1px 5px;font-size:13px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
-.row{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;font-size:13px;color:var(--muted);margin-top:4px}
-.row a{font-weight:500}
-.pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:999px}
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;font-size:12.5px;color:var(--muted);margin-top:auto;padding-top:6px}
+.row a{font-weight:600;color:var(--tab)}
+.pill{display:inline-block;font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:999px}
 .pill.ok{color:var(--ok);background:#E6F4EA}
-.pill.rep{color:var(--should);background:#FBF1DC}
-.row .topics{display:flex;flex-wrap:wrap;gap:4px;margin-left:auto}
-.none{color:var(--muted);font-size:14px;padding:14px 18px;background:var(--surface);border-radius:var(--r);box-shadow:0 0 0 .5px var(--line)}
+.pill.rep{color:#A16207;background:#FBF1DC}
+.row .topics{display:flex;flex-wrap:wrap;gap:4px;width:100%}
+.card.small .row .topics{display:none}
+.topic{background:var(--tab-soft);color:var(--tab)}
+.topic.on{background:var(--tab);color:#fff}
+.chip.on{background:var(--tab);color:#fff}
+.none{color:var(--ink);font-size:14px;padding:14px 18px;background:rgba(255,255,255,.6);border-radius:14px;grid-column:span 6}
 footer.src{margin-top:28px;color:var(--muted);font-size:12.5px;line-height:1.5}
+
+/* ---- history group list ---- */
+.group{background:var(--surface);border-radius:var(--r);box-shadow:0 0 0 .5px var(--line)}
 
 /* ---- history ---- */
 .history h1{font-size:28px;letter-spacing:-.02em;font-weight:700;margin:30px 0 16px}
@@ -112,6 +142,10 @@ footer.src{margin-top:28px;color:var(--muted);font-size:12.5px;line-height:1.5}
 
 @media (max-width:600px){
   .post-head h1{font-size:24px}
+  .tier-sec{grid-template-columns:1fr;padding:14px 12px;gap:8px}
+  .tier-label{padding:0 4px;font-size:16px}
+  .mosaic{grid-template-columns:1fr 1fr}
+  .card.big,.card.small,.card.half,.card.full,.none{grid-column:span 2}
   .tabbar a{flex:0 0 auto}
   .bar{gap:10px}
   .datenav select{max-width:38vw}
