@@ -11,6 +11,17 @@ const prevBtn = document.getElementById('prev');
 const nextBtn = document.getElementById('next');
 
 let index = [];          // [{date, kind, title, summary}] newest first
+// Saved items live in this browser (localStorage); key = url or title
+const SAVE_KEY = 'ai-brief-saved';
+function loadSaved() { try { return JSON.parse(localStorage.getItem(SAVE_KEY) || '[]'); } catch { return []; } }
+function storeSaved(list) { try { localStorage.setItem(SAVE_KEY, JSON.stringify(list)); } catch {} }
+function itemKey(it) { return it.url || it.title; }
+function isSaved(it) { return loadSaved().some(x => x.key === itemKey(it)); }
+function toggleSave(it, date, tabId) {
+  const list = loadSaved(), k = itemKey(it), i = list.findIndex(x => x.key === k);
+  if (i >= 0) list.splice(i, 1); else list.unshift({key: k, date, tab: tabId, item: it, savedAt: Date.now()});
+  storeSaved(list);
+}
 const cache = {};        // date -> post json
 
 // ---------- helpers ----------
@@ -83,7 +94,9 @@ function renderItem(it, date, tab, f, size) {
   const open = it.url ? `<a href="${esc(it.url)}" target="_blank" rel="noopener">Open ↗</a>` : '';
   const topics = (it.topics || []).map(t =>
     `<a class="topic ${f.topic.toLowerCase() === t.toLowerCase() ? 'on' : ''}" href="${buildHash(date, tab, {...f, topic: f.topic.toLowerCase() === t.toLowerCase() ? '' : t})}">${esc(t)}</a>`).join('');
-  return `<div class="card ${size || ''}">
+  const saved = isSaved(it);
+  return `<div class="card ${size || ''}" data-key="${esc(itemKey(it))}" data-ctx='${esc(JSON.stringify({date}))}'>
+    <button class="save ${saved ? 'on' : ''}" type="button" aria-pressed="${saved}" title="${saved ? 'Remove from saved' : 'Save for later'}">${saved ? 'Saved' : 'Save'}</button>
     <h3>${md(it.title)}${it.meta ? `<span class="meta">${esc(it.meta)}</span>` : ''}</h3>
     ${it.summary ? `<p>${md(it.summary)}</p>` : ''}
     ${it.note ? `<p class="note"><strong>What you can do:</strong> ${md(it.note)}</p>` : ''}
@@ -181,6 +194,19 @@ async function renderPost(post, tabId, f) {
   if (f.q) { qEl.focus(); qEl.setSelectionRange(qEl.value.length, qEl.value.length); }
 }
 
+function renderSaved() {
+  const list = loadSaved();
+  const f = {q:'', topic:'', all:false};
+  const byDate = {};
+  for (const x of list) (byDate[x.date] = byDate[x.date] || []).push(x);
+  const dates = Object.keys(byDate).sort((a, b) => b.localeCompare(a));
+  app.innerHTML = `<div class="history"><h1>Saved</h1>` +
+    (list.length ? `<p class="lead">${list.length} item${list.length === 1 ? '' : 's'} saved in this browser.</p>` +
+      dates.map(d => tierSection(`<a href="#/${d}">${fmtDate(d, {day:'numeric', month:'short'})}</a>`, 'day',
+        byDate[d].map((x, i) => { cache[d] = cache[d] || null; return renderItem(x.item, d, x.tab, f, byDate[d].length === 1 ? 's6' : 's3'); }).join(''))).join('')
+    : `<div class="none">Nothing saved yet. Use Save on any card and it will be kept here.</div>`) + `</div>`;
+}
+
 function renderHistory() {
   const byDate = Object.fromEntries(index.map(p => [p.date, p]));
   // months that have posts, newest first
@@ -223,6 +249,7 @@ function setNav(date) {
 async function route() {
   const {parts, q, topic, all} = parseHash();
   if (parts[0] === 'history' || parts[0] === 'archive') { renderHistory(); return; }
+  if (parts[0] === 'saved') { renderSaved(); return; }
   const date = parts[0] || (index[0] && index[0].date);
   if (!date) { app.innerHTML = '<p class="muted">No posts yet.</p>'; return; }
   try {
@@ -236,6 +263,24 @@ async function route() {
   }
 }
 
+app.addEventListener('click', e => {
+  const btn = e.target.closest('button.save'); if (!btn) return;
+  const card = btn.closest('.card'); const key = card.dataset.key;
+  const ctx = JSON.parse(card.dataset.ctx || '{}');
+  let hit = findItem(key, ctx);
+  if (!hit) { const sv = loadSaved().find(x => x.key === key); if (sv) hit = {item: sv.item, date: sv.date, tab: sv.tab}; }
+  if (!hit) return;
+  toggleSave(hit.item, hit.date, hit.tab);
+  const on = isSaved(hit.item);
+  btn.classList.toggle('on', on); btn.textContent = on ? 'Saved' : 'Save'; btn.setAttribute('aria-pressed', on);
+  btn.title = on ? 'Remove from saved' : 'Save for later';
+  if (location.hash.startsWith('#/saved')) route();
+});
+function findItem(key, ctx) {
+  const p = cache[ctx.date]; if (!p) return null;
+  for (const t of p.tabs) for (const tr of t.tiers) for (const it of tr.items) if (itemKey(it) === key) return {item: it, date: p.date, tab: t.id};
+  return null;
+}
 sel.onchange = () => location.hash = '#/' + sel.value;
 prevBtn.onclick = () => { const i = index.findIndex(p => p.date === sel.value); if (i < index.length - 1) location.hash = '#/' + index[i + 1].date; };
 nextBtn.onclick = () => { const i = index.findIndex(p => p.date === sel.value); if (i > 0) location.hash = '#/' + index[i - 1].date; };
