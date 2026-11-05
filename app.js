@@ -24,6 +24,7 @@ function md(s) {   // tiny inline markdown: **bold**, `code`, [text](url), blank
     .replace(/\[([^\]]+)\]\((https?:[^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
     .replace(/\n\n/g, '</p><p>');
 }
+function sentence(s) { return s.charAt(0).toUpperCase() + s.slice(1).toLowerCase(); }
 function tierClass(name) {
   const n = name.toLowerCase();
   if (n.startsWith('must')) return 'must';
@@ -94,7 +95,7 @@ function renderTiers(tab, date, f, filtering) {
   return tab.tiers.map(tr => {
     const items = tr.items.filter(it => matches(it, f));
     if (filtering && !items.length) return '';
-    return tierSection(tr.name, tierClass(tr.name), items.length
+    return tierSection(sentence(tr.name), tierClass(tr.name), items.length
       ? mosaic(items, date, tab.id, f)
       : `<div class="none">Nothing ${cache[date].kind === 'weekly' ? 'this week' : 'today'}</div>`);
   }).join('');
@@ -103,8 +104,18 @@ function tierSection(label, cls, inner) {
   return `<section class="tier-sec ${cls}"><div class="tier-label"><span>${label}</span></div><div class="mosaic">${inner}</div></section>`;
 }
 function mosaic(items, date, tabId, f) {
-  const n = items.length;
-  return items.map((it, i) => renderItem(it, date, tabId, f, n === 1 ? 'full' : n === 2 ? 'half' : i === 0 ? 'big' : 'small')).join('');
+  // column spans on a 6-col grid so every row closes: [4,2] then rows of [2,2,2]; leftovers widen
+  const n = items.length, spans = [];
+  if (n === 1) spans.push(6);
+  else if (n === 2) spans.push(3, 3);
+  else {
+    spans.push(4, 2);
+    const m = n - 2, rem = m % 3;
+    for (let i = 0; i < m - rem; i++) spans.push(2);
+    if (rem === 1) spans.push(6);
+    if (rem === 2) spans.push(3, 3);
+  }
+  return items.map((it, i) => renderItem(it, date, tabId, f, 's' + spans[i])).join('');
 }
 
 function topicChips(posts, tabId, date, f) {
