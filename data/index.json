@@ -3,7 +3,8 @@
   {
    "date": "2026-11-05",
    "kind": "daily",
-   "title": "AI Brief — Thursday, 5 November 2026"
+   "title": "AI Brief — Thursday, 5 November 2026",
+   "summary": "Open-weights day — Moonshot dropped the Kimi K3.1 Pro weights (2.8T MoE, 1M context), Ricursive's dense Ripple-65B claims the US open-weight lead on agentic coding and Tencent shipped Hy4 with weights promised \"in the coming days\", while Anthropic showed you can cryptographically prove which model produced an answer."
   }
  ]
 }

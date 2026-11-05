@@ -17,14 +17,24 @@
        "summary": "A frontier LLM identified what small networks do from raw weights alone, wrote game-playing MLPs from scratch that beat PPO baselines, and lifted Qwen3.5-0.8B from 7.9% to 48.1% on MATH-500 by editing 0.016% of its weights — no gradient descent involved. The authors call it \"very early\"; the gain on Qwen came mostly from removing a looping failure mode, and the same trick failed on Gemma 3 270M. Still the most-discussed research of the week and a new way to think about model repair.",
        "tag": "Confirmed",
        "source": "rikiyat.github.io (2 Nov)",
-       "url": "https://rikiyat.github.io/blog/weight-space-programming/"
+       "url": "https://rikiyat.github.io/blog/weight-space-programming/",
+       "topics": [
+        "Interpretability",
+        "Research",
+        "Model editing"
+       ]
       },
       {
        "title": "FlashProve: Anthropic's \"provable inference\" — a zkSNARK that proves which weights produced a response",
        "summary": "A provider commits to a set of weights and emits a proof that each response came from them; a verifier checks it in ~17 s on a CPU without seeing the weights. On Llama 4 Maverick (400B MoE, 4-bit) one H100 proves ~110 tok/s, at 70–95× the GPU time of plain vLLM inference, with a 19 MB proof per 1,024-token request. This is the first practical path to verifying that an API or router is serving the model you paid for. Code, a C++ verifier and Lean proofs are Apache 2.0. Caveats: greedy decoding, integer model, 1,024-token context.",
        "tag": "Confirmed",
        "source": "anthropic.com/research (2 Nov)",
-       "url": "https://www.anthropic.com/research/provable-inference"
+       "url": "https://www.anthropic.com/research/provable-inference",
+       "topics": [
+        "Anthropic",
+        "Security",
+        "Inference"
+       ]
       }
      ]
     },
@@ -36,21 +46,36 @@
        "summary": "Builds a 374k-run trajectory matrix across 25 benchmarks and 452 candidate models/tools/policies, then trains routers. Per-input oracle routing beats the best single candidate by 5.4 points; learned routers give modest quality gains at ~24% less policy time and ~8.8× better efficiency on average. Useful if you are deciding between a single big model and a router in production.",
        "tag": "Confirmed",
        "source": "arXiv 2611.05275 (3 Nov), #1 on HF papers",
-       "url": "https://arxiv.org/abs/2611.05275"
+       "url": "https://arxiv.org/abs/2611.05275",
+       "topics": [
+        "Routing",
+        "Evals",
+        "Research"
+       ]
       },
       {
        "title": "Think Less, Locally (LoCo): local preference learning to stop reasoning models overthinking",
        "summary": "Finds the point where a reasoning model should have stopped, generates shorter verified continuations from that state and trains with DPO on the pairs. Reasoning length drops 42–45% on math and 23–36% on code (trained on math only) with accuracy held or improved. A cheap recipe if you fine-tune reasoning models and pay per token.",
        "tag": "Confirmed",
        "source": "arXiv 2611.04814 (3 Nov)",
-       "url": "https://arxiv.org/abs/2611.04814"
+       "url": "https://arxiv.org/abs/2611.04814",
+       "topics": [
+        "Reasoning",
+        "Fine-tuning",
+        "Research"
+       ]
       },
       {
        "title": "ToolSpace: synthesising tool-use environments from real MCP traces for long-horizon agents",
        "summary": "Mines tool-call dependencies from real MCP execution traces (deterministic rules, no LLM judge), clusters them into environments, then random-walks to generate verifiable tasks. Training on it lifts Qwen3.6-35B-A3B from 23.0 to 41.0 average across seven tool-use benchmarks, and GLM-5.2 to roughly Claude Opus 5 level. Relevant if you build agent training data or evals.",
        "tag": "Confirmed",
        "source": "arXiv 2611.05036 (3 Nov)",
-       "url": "https://arxiv.org/abs/2611.05036"
+       "url": "https://arxiv.org/abs/2611.05036",
+       "topics": [
+        "Agents",
+        "MCP",
+        "Training data"
+       ]
       }
      ]
     },
@@ -62,28 +87,48 @@
        "summary": "Q4_K_M in LM Studio identified 3 of 4 games from raw policy weights, but each run took 45–65 minutes and ~40k reasoning tokens; Kimi K3.1 Pro did it in under 10 minutes. His take: real, but a patient human with pencil and paper could do the same, so the hype is overdone.",
        "tag": "Confirmed",
        "source": "simonwillison.net (3 Nov)",
-       "url": "https://simonwillison.net/2026/Nov/3/qwen-can-interpret-model-weights/"
+       "url": "https://simonwillison.net/2026/Nov/3/qwen-can-interpret-model-weights/",
+       "topics": [
+        "Interpretability",
+        "Local models",
+        "Qwen"
+       ]
       },
       {
        "title": "MEMENTO: learning context management for long-context agents",
        "summary": "Trains an agent to compress its own history into notes, keeping the working context under 20k tokens on book-length QA. A trained alternative to hand-rolled compaction heuristics.",
        "tag": "Confirmed",
        "source": "arXiv 2611.00244 (3 Nov)",
-       "url": "https://arxiv.org/abs/2611.00244"
+       "url": "https://arxiv.org/abs/2611.00244",
+       "topics": [
+        "Agents",
+        "Long context",
+        "Research"
+       ]
       },
       {
        "title": "Fidelity collapses with table size, not turn count (deployed tool-using agent)",
        "summary": "Feeding large tool outputs (big tables) straight into the planner's context is what degrades accuracy, not conversation length; delivering results through a side channel avoids it. A concrete architecture lesson for data-pipeline agents.",
        "tag": "Confirmed",
        "source": "arXiv 2611.00442 (3 Nov)",
-       "url": "https://arxiv.org/abs/2611.00442"
+       "url": "https://arxiv.org/abs/2611.00442",
+       "topics": [
+        "Agents",
+        "Data pipelines",
+        "Research"
+       ]
       },
       {
        "title": "Embedding Semantic Entropy: NLI-free hallucination detection",
        "summary": "Clusters sampled responses by embedding similarity instead of running an entailment model, matching semantic-entropy performance at a fraction of the cost. Easy to bolt onto an existing RAG eval loop.",
        "tag": "Confirmed",
        "source": "arXiv 2611.03876 (4 Nov)",
-       "url": "https://arxiv.org/abs/2611.03876"
+       "url": "https://arxiv.org/abs/2611.03876",
+       "topics": [
+        "Hallucination",
+        "RAG",
+        "Evals"
+       ]
       }
      ]
     }
@@ -103,7 +148,12 @@
        "source": "GitHub (created 31 Oct), TechNode",
        "url": "https://github.com/deepseek-ai/dsh-superagent-prototype",
        "meta": "★ ~19k",
-       "note": "point it at one repo and let it work issues in parallel while you review PRs."
+       "note": "point it at one repo and let it work issues in parallel while you review PRs.",
+       "topics": [
+        "DeepSeek",
+        "Coding agents",
+        "Open source"
+       ]
       },
       {
        "title": "RikiyaT/lm_understand-logs — code and logs behind Weight-Space Programming",
@@ -111,7 +161,12 @@
        "tag": "Confirmed",
        "source": "GitHub, huggingface.co/RikiyaT",
        "url": "https://github.com/RikiyaT/lm_understand-logs",
-       "note": "replay the game-identification and weight-edit experiments, or hand the raw weights of your own small model to an LLM and see what it infers."
+       "note": "replay the game-identification and weight-edit experiments, or hand the raw weights of your own small model to an LLM and see what it infers.",
+       "topics": [
+        "Interpretability",
+        "Research",
+        "Model editing"
+       ]
       }
      ]
     },
@@ -125,7 +180,12 @@
        "source": "GitHub (created 31 Oct), MIT/Apache-2.0",
        "url": "https://github.com/storytold/craft-anything",
        "meta": "★ ~14k, Rust",
-       "note": "port a legacy internal tool to a new framework, or use the MCP tools as a reusable \"inspect this UI\" toolkit for your own agents."
+       "note": "port a legacy internal tool to a new framework, or use the MCP tools as a reusable \"inspect this UI\" toolkit for your own agents.",
+       "topics": [
+        "Coding agents",
+        "MCP",
+        "Open source"
+       ]
       },
       {
        "title": "KKKKhazix/agent-autoloop",
@@ -134,7 +194,12 @@
        "source": "GitHub (created 3 Nov)",
        "url": "https://github.com/KKKKhazix/agent-autoloop",
        "meta": "★ ~3k, TypeScript",
-       "note": "wire nightly data-pipeline checks or issue triage to an agent that runs unattended and pings you only for decisions."
+       "note": "wire nightly data-pipeline checks or issue triage to an agent that runs unattended and pings you only for decisions.",
+       "topics": [
+        "Agents",
+        "Automation",
+        "Open source"
+       ]
       },
       {
        "title": "Balanov/uncut",
@@ -143,7 +208,12 @@
        "source": "GitHub (created 1 Nov), MIT",
        "url": "https://github.com/Balanov/uncut",
        "meta": "★ ~600, Go",
-       "note": "`git diff | uncut \"Review this diff\"` in CI, with `--json` NDJSON events and resumable JSONL sessions."
+       "note": "`git diff | uncut \"Review this diff\"` in CI, with `--json` NDJSON events and resumable JSONL sessions.",
+       "topics": [
+        "Coding agents",
+        "CLI",
+        "Open source"
+       ]
       }
      ]
     },
@@ -156,14 +226,23 @@
        "tag": "Confirmed",
        "source": "GitHub (created 1 Nov)",
        "url": "https://github.com/caru-ini/stack-diagram",
-       "meta": "★ ~1.8k"
+       "meta": "★ ~1.8k",
+       "topics": [
+        "Tooling",
+        "Agent skills"
+       ]
       },
       {
        "title": "datasette-agent 0.5a0 and datasette-apps 0.3a0",
        "summary": "Simon Willison's Datasette agent now keeps a chat panel beside your data pages and can build/edit custom HTML apps over stored queries, with approval gates on write queries. A worked example of an agent living inside a data tool rather than beside it.",
        "tag": "Confirmed",
        "source": "simonwillison.net (3–4 Nov)",
-       "url": "https://simonwillison.net/2026/Nov/3/datasette-agent/"
+       "url": "https://simonwillison.net/2026/Nov/3/datasette-agent/",
+       "topics": [
+        "Tooling",
+        "Data",
+        "Agents"
+       ]
       }
      ]
     }
@@ -181,14 +260,24 @@
        "summary": "The model that topped Vals' October open-weight ranking is now self-hostable: MoE with 896 experts (16 routed + 2 shared), KDA plus gated sparse attention for long context, MXFP4 weights from quantisation-aware training, MoonViT-V2 vision encoder. Serve with vLLM or SGLang; `reasoning_effort` low/high/max; Huawei announced Ascend support. Licence is a custom \"Kimi K3.1 Pro License\", so read it before commercial use. Weights are ~1.5 TB, so this is for clusters, not laptops.",
        "tag": "Confirmed",
        "source": "Hugging Face model card, TechNode (5 Nov), HN 514 pts",
-       "url": "https://huggingface.co/moonshotai/Kimi-K3.1-Pro"
+       "url": "https://huggingface.co/moonshotai/Kimi-K3.1-Pro",
+       "topics": [
+        "Moonshot",
+        "Open weights",
+        "Model release"
+       ]
       },
       {
        "title": "OpenAI to acquire Pierre Computer Company to build out Codex's repo and review layer",
        "summary": "Pierre makes a Code Storage service plus the open-source Trees and Diffs libraries that Codex already uses for file-tree navigation and visual diffs; terms undisclosed, open-source projects stay public. Together with OpenAI's internal Pando source-control backend, it points at Codex becoming an end-to-end repository and review environment rather than a tool that sits on top of GitHub.",
        "tag": "Confirmed",
        "source": "openai.com, Yahoo Finance, The Information (4 Nov)",
-       "url": "https://openai.com/index/openai-to-acquire-pierre/"
+       "url": "https://openai.com/index/openai-to-acquire-pierre/",
+       "topics": [
+        "OpenAI",
+        "Codex",
+        "Acquisition"
+       ]
       }
      ]
     },
@@ -200,14 +289,24 @@
        "summary": "770B total / 49B active, 1M context, first Hy model that can drive CLI and GUI (trained on Blender and CAD workflows). Tencent reports hallucination rate down from 12.95% to 7.2% versus the Preview and a lead over DeepSeek-V4.1-Flash and Kimi K3.1 Pro in a 213-analyst blind financial-analysis eval. Available now on Tencent Cloud TokenHub and OpenRouter at ~$0.90/$2.70 per M tokens; a Flash variant is coming.",
        "tag": "Confirmed",
        "source": "Tencent press release, SiliconANGLE (4 Nov)",
-       "url": "https://www.tencent.com/tencent-launches-hy4-joining-the-ranks-of-the-worlds-leading-open-source-ai-models/"
+       "url": "https://www.tencent.com/tencent-launches-hy4-joining-the-ranks-of-the-worlds-leading-open-source-ai-models/",
+       "topics": [
+        "Tencent",
+        "Open weights",
+        "Computer use"
+       ]
       },
       {
        "title": "IEEE Spectrum: \"AI is forcing us to pay off 40 years of technical debt\" (the PHP2Shell story)",
        "summary": "An out-of-memory bug reported to PHP in 2024 and shelved became remote code execution within two weeks once an AI-assisted researcher looked at it; a four-person team then needed two months to patch it. The argument — AI makes finding bugs far cheaper than fixing them, which lands hardest on open-source maintainers — is the top HN thread today at 1,100+ points.",
        "tag": "Confirmed",
        "source": "IEEE Spectrum (2 Nov, updated 4 Nov), HN",
-       "url": "https://spectrum.ieee.org/ai-in-cybersecurity-php2shell-vulnerability"
+       "url": "https://spectrum.ieee.org/ai-in-cybersecurity-php2shell-vulnerability",
+       "topics": [
+        "Security",
+        "Open source",
+        "Industry"
+       ]
       }
      ]
     },
@@ -219,14 +318,23 @@
        "summary": "A 300+ point, 300+ comment snapshot of what developers actually pay for and run: subscriptions vs OpenRouter vs local, which harness (Claude Code, Codex, Cursor, OpenCode, Pi, Aider, Hermes) and why they switched. Worth ten minutes if you are reconsidering your own stack.",
        "tag": "Confirmed",
        "source": "news.ycombinator.com",
-       "url": "https://news.ycombinator.com/item?id=50366117"
+       "url": "https://news.ycombinator.com/item?id=50366117",
+       "topics": [
+        "Agents",
+        "Community",
+        "Tooling"
+       ]
       },
       {
        "title": "Latent Space AI News (3 Nov) — the full weekend roundup",
        "summary": "Includes items this brief did not independently verify: SemiAnalysis' GDPx economic-task eval (best model 12%), Qwen's statement that it will stay open-weight through Qwen 4 and 5, and MiniMax M3.1 Flash community quants. Treat the X/Reddit-sourced items as unverified.",
        "tag": "Reported",
        "source": "latent.space",
-       "url": "https://latent.space/p/ainews-llms-can-read-write-neural-network-weights-weight-space-programming-cuts-autoresearch-out-of/"
+       "url": "https://latent.space/p/ainews-llms-can-read-write-neural-network-weights-weight-space-programming-cuts-autoresearch-out-of/",
+       "topics": [
+        "Newsletter",
+        "Roundup"
+       ]
       }
      ]
     }
@@ -244,14 +352,26 @@
        "summary": "From Ricursive Intelligence (an AI chip-design lab); a dense Transformer pretrained on 12T tokens with 1M context, which the company calls US open-weight SOTA on agentic coding, ahead of Reflection Beam 501B (80.1) and Muse Spark Open 816B (76.4) at roughly a tenth of the training cost (~$32M). At 65B dense it runs on a DGX Spark or a high-memory MacBook Pro, which none of the 500B+ open models do. Licence not stated on the page; available on Hugging Face, Together, OpenRouter and GMI Cloud.",
        "tag": "Confirmed",
        "source": "ricursive.com (4 Nov), MarkTechPost, HN 287 pts",
-       "url": "https://www.ricursive.com/ripple"
+       "url": "https://www.ricursive.com/ripple",
+       "topics": [
+        "Ricursive",
+        "Open weights",
+        "Coding agents",
+        "Model release"
+       ]
       },
       {
        "title": "Tencent Hy4 — 770B/49B-active, vision + computer use, API live now",
        "summary": "The first open-weights-track model from a major lab with native computer use, priced at ~$0.90 in / $2.70 out per million tokens (50% off on Tencent Cloud through December). Weights and system cards are promised within days; two research models built on it (HyCell for single-cell biology, HyPDE for physics fields) are already open.",
        "tag": "Confirmed",
        "source": "hy.tencent.ai, Tencent press release (4 Nov)",
-       "url": "https://siliconangle.com/2026/11/04/tencent-releases-hy4-powerful-frontier-llm-introducing-visual-understanding-and-computer-use/"
+       "url": "https://siliconangle.com/2026/11/04/tencent-releases-hy4-powerful-frontier-llm-introducing-visual-understanding-and-computer-use/",
+       "topics": [
+        "Tencent",
+        "Open weights",
+        "Computer use",
+        "API"
+       ]
       }
      ]
     },
@@ -263,21 +383,36 @@
        "summary": "Two new image models on `v1/images/generations` and `v1/images/edits` with adjustable complexity, native SVG and animated GIF output, and markup-guided editing; OpenAI says generation is ~50% faster. Images 2.6 also rolls out in ChatGPT and Codex with reference images.",
        "tag": "Confirmed",
        "source": "OpenAI API changelog (4 Nov)",
-       "url": "https://developers.openai.com/api/docs/changelog"
+       "url": "https://developers.openai.com/api/docs/changelog",
+       "topics": [
+        "OpenAI",
+        "API",
+        "Image models"
+       ]
       },
       {
        "title": "Claude API: Message threads beta — server-side conversation state",
        "summary": "With the `message-threads-2026-08-12` header the API keeps the conversation on the server and each request sends only new messages; threads expire 5 minutes after the last request and are deleted within an hour. Cuts payload size and client-side bookkeeping for agent loops. Available on the Claude API, AWS, Google Cloud (Anthropic-managed) and Microsoft Foundry.",
        "tag": "Confirmed",
        "source": "platform.claude.com release notes (2 Nov)",
-       "url": "https://platform.claude.com/docs/en/release-notes/overview"
+       "url": "https://platform.claude.com/docs/en/release-notes/overview",
+       "topics": [
+        "Anthropic",
+        "API",
+        "Agents"
+       ]
       },
       {
        "title": "vLLM v0.33.0",
        "summary": "Adds Reflection Beam-1.0 and Muse Spark Open, moves to PyTorch 2.14 and CUDA 13.0 by default (12.9 wheels dropped), plus speculative-decoding and NVIDIA decode speedups. Breaking: Medusa, the MLP speculator and the legacy Ray compiled-graph executor are removed — check your serving configs before upgrading.",
        "tag": "Confirmed",
        "source": "GitHub releases (2 Nov)",
-       "url": "https://github.com/vllm-project/vllm/releases"
+       "url": "https://github.com/vllm-project/vllm/releases",
+       "topics": [
+        "vLLM",
+        "Inference",
+        "Release"
+       ]
       }
      ]
     },
@@ -289,21 +424,34 @@
        "summary": "Generated text carries Anthropic's text watermark on the listed platforms; on Sonnet 4.6, non-default `temperature`/`top_p`/`top_k` may skip it. Relevant if you post-process or detect model output in pipelines.",
        "tag": "Confirmed",
        "source": "platform.claude.com release notes (3 Nov)",
-       "url": "https://platform.claude.com/docs/en/release-notes/overview"
+       "url": "https://platform.claude.com/docs/en/release-notes/overview",
+       "topics": [
+        "Anthropic",
+        "API"
+       ]
       },
       {
        "title": "Running Kimi K3.1 Pro yourself: the practical bits",
        "summary": "The model card recommends vLLM, SGLang or TokenSpeed with an OpenAI-compatible endpoint; set `reasoning_effort` (default \"max\"), and for multi-turn tool use pass back the full assistant message including `reasoning_content` and `tool_calls`, not just `content`. Transformers works with `trust_remote_code=True`.",
        "tag": "Confirmed",
        "source": "Hugging Face model card",
-       "url": "https://huggingface.co/moonshotai/Kimi-K3.1-Pro"
+       "url": "https://huggingface.co/moonshotai/Kimi-K3.1-Pro",
+       "topics": [
+        "Moonshot",
+        "Inference",
+        "How-to"
+       ]
       },
       {
        "title": "Gemini API changelog: no new entries since 30 Oct",
        "summary": "Nothing shipped in the Gemini API over the last five days; checked so you don't have to.",
        "tag": "Confirmed",
        "source": "ai.google.dev",
-       "url": "https://ai.google.dev/gemini-api/docs/changelog"
+       "url": "https://ai.google.dev/gemini-api/docs/changelog",
+       "topics": [
+        "Google",
+        "API"
+       ]
       }
      ]
     }
@@ -332,6 +480,11 @@
          "label": "Local reproduction",
          "url": "https://simonwillison.net/2026/Nov/3/qwen-can-interpret-model-weights/"
         }
+       ],
+       "topics": [
+        "Interpretability",
+        "Research",
+        "Model editing"
        ]
       }
      ]

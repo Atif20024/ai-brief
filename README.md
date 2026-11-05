@@ -19,11 +19,11 @@ Daily (Mon–Sat) and weekly (Sunday) digest of AI and data-science news, resear
   "tabs": [
     {"id": "research", "name": "Research & Developments", "tiers": [
       {"name": "Must See", "items": [
-        {"title": "…", "meta": "★ ~19k", "summary": "…", "note": "what you can do", "tag": "Confirmed", "source": "…", "url": "https://…", "links": [{"label": "…", "url": "…"}]}
+        {"title": "…", "meta": "★ ~19k", "summary": "…", "note": "what you can do", "tag": "Confirmed", "source": "…", "url": "https://…", "topics": ["OpenAI", "Agents"], "links": [{"label": "…", "url": "…"}]}
       ]}
     ]}
   ],
   "footer": "sources checked…"
 }
 ```
-Only `title` is required per item. Tab ids and tier names are free-form; tiers starting with "Must"/"Should" are colour-coded.
+Only `title` is required per item. `topics` (2-4 short tags per item, e.g. "OpenAI", "Agents", "RAG", "Open weights") powers the topic filters — reuse existing tag spellings where possible. Tab ids and tier names are free-form; tiers starting with "Must"/"Should" are colour-coded.
