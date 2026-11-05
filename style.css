@@ -1,0 +1,58 @@
+:root{--bg:#0f1115;--card:#171a21;--border:#262b36;--text:#e9ecf1;--muted:#9aa3b2;--accent:#7aa2ff;--must:#ff8a65;--should:#ffd166;--good:#9aa3b2;--ok:#4fd08a}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:820px;margin:0 auto;padding:0 16px}
+.muted{color:var(--muted)}
+
+/* top bar */
+.top{position:sticky;top:0;z-index:10;background:rgba(15,17,21,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.bar{display:flex;align-items:center;gap:12px;height:54px}
+.brand{font-weight:700;color:var(--text);font-size:17px}
+.datenav{display:flex;align-items:center;gap:4px;margin-left:auto}
+.datenav button{background:var(--card);border:1px solid var(--border);color:var(--text);width:32px;height:32px;border-radius:8px;cursor:pointer;font-size:18px;line-height:1}
+.datenav button:disabled{opacity:.35;cursor:default}
+.datenav select{background:var(--card);border:1px solid var(--border);color:var(--text);height:32px;border-radius:8px;padding:0 8px;font-size:14px;max-width:46vw}
+.archive-link{font-size:14px;color:var(--muted)}
+
+/* post header */
+.post-head{padding:22px 0 14px}
+.post-head h1{font-size:22px;margin:0 0 6px;letter-spacing:-.01em}
+.post-head .kind{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(122,162,255,.4);border-radius:999px;padding:2px 8px;margin-bottom:8px}
+.post-head .one{margin:0;color:var(--muted);font-size:15px}
+.post-head .one strong{color:var(--text)}
+.post-head .window{font-size:12px;color:var(--muted);margin-top:6px}
+
+/* tabs */
+.tabbar{position:sticky;top:54px;z-index:9;display:flex;gap:6px;overflow-x:auto;padding:10px 0;background:var(--bg);border-bottom:1px solid var(--border);scrollbar-width:none}
+.tabbar::-webkit-scrollbar{display:none}
+.tabbar a{flex:none;padding:7px 13px;border:1px solid var(--border);border-radius:999px;color:var(--muted);font-size:13px;font-weight:500;background:var(--card);white-space:nowrap}
+.tabbar a.active{color:var(--text);border-color:var(--accent);background:#1b2233}
+.tabbar a:hover{text-decoration:none;color:var(--text)}
+.tabbar a .n{opacity:.6;font-size:11px;margin-left:4px}
+
+/* tiers & cards */
+.panel{padding:14px 0 60px}
+h2.tier{font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin:20px 0 10px;font-weight:700;color:var(--good)}
+h2.tier.must{color:var(--must)} h2.tier.should{color:var(--should)}
+h2.tier:first-child{margin-top:6px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:10px}
+.card h3{font-size:16px;margin:0 0 6px;line-height:1.35}
+.card h3 .meta{color:var(--muted);font-weight:400;font-size:13px;margin-left:6px}
+.card p{margin:0 0 8px;font-size:15px}
+.card p.note{color:var(--muted);font-size:14px}
+.card code{background:#0f1115;border:1px solid var(--border);border-radius:4px;padding:0 4px;font-size:13px}
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;font-size:13px;color:var(--muted)}
+.pill{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.04em;padding:2px 8px;border-radius:999px;border:1px solid}
+.pill.ok{color:var(--ok);border-color:rgba(79,208,138,.45);background:rgba(79,208,138,.08)}
+.pill.rep{color:var(--should);border-color:rgba(255,209,102,.45);background:rgba(255,209,102,.08)}
+.none{color:var(--muted);font-style:italic;font-size:14px;padding:4px 2px}
+footer.src{margin-top:24px;color:var(--muted);font-size:12px;border-top:1px solid var(--border);padding-top:12px}
+
+/* archive */
+.archive h1{font-size:22px;margin:22px 0 12px}
+.archive h2{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:18px 0 8px}
+.archive a.post{display:flex;justify-content:space-between;gap:12px;padding:10px 14px;background:var(--card);border:1px solid var(--border);border-radius:10px;margin-bottom:8px;color:var(--text)}
+.archive a.post:hover{border-color:var(--accent);text-decoration:none}
+.archive a.post .d{color:var(--muted);font-size:13px;white-space:nowrap}
