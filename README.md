@@ -7,6 +7,7 @@ Daily (Mon–Sat) and weekly (Sunday) digest of AI and data-science news, resear
 - `data/YYYY-MM-DD.json` — one file per post. `data/index.json` lists them all.
 - `state/instructions.md` — standing instructions the task reads every run. Edit this to steer the brief.
 - `state/watchlist.md` — things to keep following.
+- `state/voices.md` — researchers/builders whose blogs feed the Voices tab. Edit to add or remove people.
 - `state/seen.md` — everything already posted, so nothing repeats.
 
 ## Post format (`data/YYYY-MM-DD.json`)
@@ -26,4 +27,4 @@ Daily (Mon–Sat) and weekly (Sunday) digest of AI and data-science news, resear
   "footer": "sources checked…"
 }
 ```
-Only `title` is required per item. `topics` (2-4 short tags per item, e.g. "OpenAI", "Agents", "RAG", "Open weights") powers the topic filters — reuse existing tag spellings where possible. Tab ids and tier names are free-form; tiers starting with "Must"/"Should" are colour-coded.
+Daily tabs: research, repos, news, models, voices, learn. Weekly tabs: week, research, repos, news, models, voices, catchup. Only `title` is required per item. `topics` (2-4 short tags per item, e.g. "OpenAI", "Agents", "RAG", "Open weights") powers the topic filters — reuse existing tag spellings where possible. Tab ids and tier names are free-form; tiers starting with "Must"/"Should" are colour-coded.

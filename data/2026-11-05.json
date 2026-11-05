@@ -458,6 +458,138 @@
    ]
   },
   {
+   "id": "voices",
+   "name": "Voices",
+   "tiers": [
+    {
+     "name": "Must See",
+     "items": [
+      {
+       "title": "Andrej Karpathy: HackerTube",
+       "summary": "Fed up with YouTube's recommender, Karpathy had Claude filter ~40K Hacker News comments for video links and build and deploy HackerTube — a YouTube-style site of ~6,454 HN-recommended videos — with zero hand-written code. A clean worked example of an agent handling data processing, UI, deployment and hardening end to end; he shares the data export so you can build your own.",
+       "tag": "Confirmed",
+       "source": "karpathy.bearblog.dev (31 Oct)",
+       "url": "https://karpathy.bearblog.dev/hacker-tube/",
+       "meta": "karpathy.bearblog.dev (31 Oct)",
+       "topics": [
+        "Andrej Karpathy",
+        "Coding agents",
+        "Side project"
+       ]
+      },
+      {
+       "title": "Nathan Lambert: Was I wrong about open models & cyber risks?",
+       "summary": "After 'Black October' (PHP2Shell and a long-standing GitLab bug among a wave of critical disclosures), Lambert revisits his view that an open-weight frontier model would be manageable. His argument: cyber risk tracks AI capability and diffusion rather than open vs closed, closed models featured more in recent hacks, defensive research lags offensive, and insecure model APIs are themselves an attack surface.",
+       "tag": "Confirmed",
+       "source": "interconnects.ai (30 Oct)",
+       "url": "https://www.interconnects.ai/p/was-i-wrong-about-open-models-and",
+       "meta": "interconnects.ai (30 Oct)",
+       "topics": [
+        "Nathan Lambert",
+        "Open weights",
+        "Security",
+        "Policy"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Should See",
+     "items": [
+      {
+       "title": "Jack Clark: Import AI 479: Spacewar; low-latency tasks versus LLMs; Genie 4",
+       "summary": "Highlights Realtime-Bench, where the best model scores 36% under a real-time clock versus ~70–80% with the clock paused — so agents that look reliable in demos degrade when latency matters. Also previews DeepMind's Genie 4 world model (native audio, Gemini-guided planning, trusted testers only).",
+       "tag": "Confirmed",
+       "source": "importai.substack.com (2 Nov)",
+       "url": "https://importai.substack.com/p/import-ai-479-spacewar-low-latency",
+       "meta": "importai.substack.com (2 Nov)",
+       "topics": [
+        "Jack Clark",
+        "Agents",
+        "Evals",
+        "Google"
+       ]
+      },
+      {
+       "title": "Simon Willison: llm 0.37 (annotated release notes)",
+       "summary": "Two months of changes to the LLM CLI/library: new gpt-6.1-sol and gpt-6.1-terra models, a command to register any OpenAI-compatible endpoint, multimodal embeddings (audio/image/video, e.g. Gemini Embedding 2), and the default model switched to gpt-6-luna at half the previous cost. Useful if you script against models from the terminal or Python.",
+       "tag": "Confirmed",
+       "source": "simonwillison.net (2 Nov)",
+       "url": "https://simonwillison.net/2026/Nov/2/llm/",
+       "meta": "simonwillison.net (2 Nov)",
+       "topics": [
+        "Simon Willison",
+        "Tooling",
+        "CLI",
+        "OpenAI"
+       ]
+      },
+      {
+       "title": "swyx (Latent Space): Building AI for Lawyers — Jacob Lauritzen, CTO of Legora",
+       "summary": "How Legora evaluates legal agents without access to customer data: simulated RL-style environments built with lawyers, and a fan-out 'Tabular Review' pattern that tests prompts on 10 rows before scaling to a million cells. Practical takeaways on building eval sets when production traces are off-limits and on routing across models instead of exposing a model picker.",
+       "tag": "Confirmed",
+       "source": "latent.space (2 Nov)",
+       "url": "https://latent.space/p/building-ai-for-lawyers-jacob-lauritzen-cto-of-legora/",
+       "meta": "latent.space (2 Nov)",
+       "topics": [
+        "swyx",
+        "Evals",
+        "Agents",
+        "Legal AI"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Good To Know",
+     "items": [
+      {
+       "title": "Nathan Lambert: How big is the open model economy today?",
+       "summary": "Uses token volumes from Baseten, Fireworks and Together AI plus OpenRouter's open-model share to argue open-model inference is growing near-exponentially, and asks whether it is still a rounding error next to OpenAI and Anthropic. Mostly paywalled; relevant if you decide where to host open-weight models.",
+       "tag": "Confirmed",
+       "source": "interconnects.ai (4 Nov)",
+       "url": "https://www.interconnects.ai/p/how-well-can-we-measure-open-model",
+       "meta": "interconnects.ai (4 Nov)",
+       "topics": [
+        "Nathan Lambert",
+        "Open weights",
+        "Inference",
+        "Industry"
+       ]
+      },
+      {
+       "title": "Andrew Ng (The Batch): Issue 377: AI fears for Halloween 2026",
+       "summary": "The annual Halloween issue: rogue test agents breaching orgs in cyber evals, agent data leakage, AI-detector false positives and the new text watermarks from Anthropic and OpenAI, and OpenAI pulling GPT-6.1 Astra's October debut. Ng's letter separates warranted concerns from fear used for publicity; practical implications are sandboxed agents, scoped credentials and checked data-retention settings.",
+       "tag": "Confirmed",
+       "source": "deeplearning.ai (30 Oct)",
+       "url": "https://www.deeplearning.ai/the-batch/issue-377",
+       "meta": "deeplearning.ai (30 Oct)",
+       "topics": [
+        "Andrew Ng",
+        "Security",
+        "Agents",
+        "Newsletter"
+       ]
+      },
+      {
+       "title": "Simon Willison: The U.S. Census Bureau and \"Super Intelligence\"",
+       "summary": "Updates his business-AI-adoption chart with the latest Census Bureau BTOS data: large-firm reported use jumped from ~12% (Sep 2025) to ~40% (Oct 2026), partly because the question was broadened, and the Bureau now asks about 'Super Intelligence' under an executive order. A cautionary example of question-wording changes breaking a time series, with raw XLSX links.",
+       "tag": "Confirmed",
+       "source": "simonwillison.net (2 Nov)",
+       "url": "https://simonwillison.net/2026/Nov/2/census-bureau-super-intelligence/",
+       "meta": "simonwillison.net (2 Nov)",
+       "topics": [
+        "Simon Willison",
+        "Data",
+        "Industry",
+        "Adoption"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
    "id": "learn",
    "name": "Learn",
    "tiers": [
@@ -492,5 +624,5 @@
    ]
   }
  ],
- "footer": "Sources checked this run: Hugging Face papers & models, arXiv cs.LG/cs.CL new, GitHub, Hacker News, Latent Space AI News, Simon Willison, Anthropic research, OpenAI & Claude API changelogs, Tencent press, TechNode, SiliconANGLE, IEEE Spectrum, Yahoo Finance. Not reachable: The Verge, Ars Technica, Bloomberg; openai.com posts returned errors. Star counts are approximate at build time."
+ "footer": "Sources checked this run: Hugging Face papers & models, arXiv cs.LG/cs.CL new, GitHub, Hacker News, Latent Space AI News, Simon Willison, Anthropic research, OpenAI & Claude API changelogs, Tencent press, TechNode, SiliconANGLE, IEEE Spectrum, Yahoo Finance. Not reachable: The Verge, Ars Technica, Bloomberg; openai.com posts returned errors. Star counts are approximate at build time. Voices checked with nothing new this week: Sebastian Raschka, Lilian Weng, Chip Huyen, Eugene Yan, Hamel Husain, Jay Alammar, Ethan Mollick, Jim Fan, Dwarkesh Patel (non-AI posts)."
 }

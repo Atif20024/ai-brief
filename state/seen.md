@@ -32,3 +32,11 @@ One line per item already posted: `YYYY-MM-DD | title | url`. The task appends h
 2026-11-05 | Claude API: text watermark now on Mythos 5, Opus 4.7 and Sonnet 4.6 output | https://platform.claude.com/docs/en/release-notes/overview
 2026-11-05 | Running Kimi K3.1 Pro yourself: the practical bits | https://huggingface.co/moonshotai/Kimi-K3.1-Pro
 2026-11-05 | Gemini API changelog: no new entries since 30 Oct | https://ai.google.dev/gemini-api/docs/changelog
+2026-11-05 | Andrej Karpathy: HackerTube | https://karpathy.bearblog.dev/hacker-tube/
+2026-11-05 | Nathan Lambert: Was I wrong about open models & cyber risks? | https://www.interconnects.ai/p/was-i-wrong-about-open-models-and
+2026-11-05 | Jack Clark: Import AI 479: Spacewar; low-latency tasks versus LLMs; Genie 4 | https://importai.substack.com/p/import-ai-479-spacewar-low-latency
+2026-11-05 | Simon Willison: llm 0.37 (annotated release notes) | https://simonwillison.net/2026/Nov/2/llm/
+2026-11-05 | swyx (Latent Space): Building AI for Lawyers — Jacob Lauritzen, CTO of Legora | https://latent.space/p/building-ai-for-lawyers-jacob-lauritzen-cto-of-legora/
+2026-11-05 | Nathan Lambert: How big is the open model economy today? | https://www.interconnects.ai/p/how-well-can-we-measure-open-model
+2026-11-05 | Andrew Ng (The Batch): Issue 377: AI fears for Halloween 2026 | https://www.deeplearning.ai/the-batch/issue-377
+2026-11-05 | Simon Willison: The U.S. Census Bureau and "Super Intelligence" | https://simonwillison.net/2026/Nov/2/census-bureau-super-intelligence/
