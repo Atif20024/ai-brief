@@ -138,10 +138,20 @@ function topicChips(posts, tabId, date, f) {
     for (const tr of tab.tiers) for (const it of tr.items)
       for (const t of (it.topics || [])) counts[t] = (counts[t] || 0) + 1;
   }
-  return Object.entries(counts).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).map(([t, n]) => {
+  const all = Object.entries(counts).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+  const LIMIT = 8;
+  // the selected topic always stays in the visible set
+  const idx = all.findIndex(([t]) => t.toLowerCase() === f.topic.toLowerCase());
+  if (idx >= LIMIT) all.splice(LIMIT - 1, 0, all.splice(idx, 1)[0]);
+  const chip = ([t, n]) => {
     const on = f.topic.toLowerCase() === t.toLowerCase();
     return `<a class="chip ${on ? 'on' : ''}" href="${buildHash(date, tabId, {...f, topic: on ? '' : t})}">${esc(t)}<span class="n">${n}</span></a>`;
-  }).join('');
+  };
+  const head = all.slice(0, LIMIT).map(chip).join('');
+  const rest = all.slice(LIMIT);
+  if (!rest.length) return head;
+  return head + `<span class="more-chips">${rest.map(chip).join('')}</span>` +
+    `<button type="button" class="chip more" aria-expanded="false" data-label="${rest.length} more <span class=&quot;caret&quot;>▾</span>">${rest.length} more <span class="caret">▾</span></button>`;
 }
 
 async function renderPost(post, tabId, f) {
@@ -264,6 +274,8 @@ async function route() {
 }
 
 app.addEventListener('click', e => {
+  const more = e.target.closest('button.more');
+  if (more) { const open = more.parentElement.classList.toggle('open'); more.setAttribute('aria-expanded', open); more.innerHTML = open ? 'Less <span class="caret">▴</span>' : more.dataset.label; return; }
   const btn = e.target.closest('button.save'); if (!btn) return;
   const card = btn.closest('.card'); const key = card.dataset.key;
   const ctx = JSON.parse(card.dataset.ctx || '{}');
