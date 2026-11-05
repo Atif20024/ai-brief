@@ -95,7 +95,7 @@ function renderTiers(tab, date, f, filtering) {
     const items = tr.items.filter(it => matches(it, f));
     if (filtering && !items.length) return '';
     return `<h2 class="tier ${tierClass(tr.name)}">${esc(tr.name)}</h2>` +
-      (items.length ? items.map(it => renderItem(it, date, tab.id, f)).join('')
+      (items.length ? `<div class="group">${items.map(it => renderItem(it, date, tab.id, f)).join('')}</div>`
                     : `<div class="none">Nothing ${cache[date].kind === 'weekly' ? 'this week' : 'today'}</div>`);
   }).join('');
 }
@@ -131,7 +131,7 @@ async function renderPost(post, tabId, f) {
       const items = t.tiers.flatMap(tr => tr.items.filter(it => matches(it, f)));
       if (!items.length) return '';
       return `<h2 class="tier day"><a href="#/${p.date}/${tabId}">${fmtDate(p.date)}${p.kind === 'weekly' ? ' · Weekly' : ''}</a></h2>` +
-        items.map(it => renderItem(it, p.date, tabId, f)).join('');
+        `<div class="group">${items.map(it => renderItem(it, p.date, tabId, f)).join('')}</div>`;
     }).join('') || `<div class="none">No matches on any day.</div>`;
   } else {
     chips = topicChips([post], tabId, post.date, f);
@@ -156,6 +156,7 @@ async function renderPost(post, tabId, f) {
       ${!filtering && post.footer ? `<footer class="src">${md(post.footer)}</footer>` : ''}
     </section>`;
 
+  const act = document.querySelector('.tabbar a.active'); if (act) act.scrollIntoView({block:'nearest', inline:'center'});
   const qEl = document.getElementById('q');
   let timer;
   qEl.oninput = () => { clearTimeout(timer); timer = setTimeout(() => { location.hash = buildHash(post.date, tabId, {...f, q: qEl.value.trim()}); }, 250); };
@@ -190,7 +191,7 @@ function renderHistory() {
     <h1>History</h1>
     <div class="cals">${cal}</div>
     <h2 class="tier">Timeline</h2>
-    ${timeline}
+    <div class="group">${timeline}</div>
   </div>`;
 }
 
