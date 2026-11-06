@@ -1,0 +1,675 @@
+{
+ "date": "2026-11-06",
+ "kind": "daily",
+ "title": "AI Brief — Friday, 6 November 2026",
+ "summary": "Security and open weights dominate: OpenAI's agent pipeline wrote 948 working Linux-kernel root exploits (and patches) for $1.2M and GPT-6-Cyber hit the API, Thinking Machines unveiled Inkling 2 Small with Apache-2.0 weights promised next week, llama.cpp shipped v0.9.0 with FP8, and two papers argue agents don't need long context or extra turns as much as you think.",
+ "window": "last ~36 hours (4–6 Nov)",
+ "tabs": [
+  {
+   "id": "research",
+   "name": "Research & Developments",
+   "tiers": [
+    {
+     "name": "Must See",
+     "items": [
+      {
+       "title": "What Does Multi-Turn RL Really Improve in LLM Agents? (BudgetMix RL)",
+       "summary": "Zhu, Jin et al. (CAS/Tsinghua) measure agentic RL with a Pass@(K,T) metric and find the gains come almost entirely from error recovery and staying on task over long horizons, not from better individual decisions — and they shrink or vanish when the test-time turn budget is tight. BudgetMix RL, which varies the interaction budget during training, keeps the gains stable; if you train or evaluate tool-using agents with RL, this changes how you should set turn limits. Code is on GitHub.",
+       "tag": "Confirmed",
+       "source": "arXiv 2611.06483 (4 Nov)",
+       "url": "https://arxiv.org/abs/2611.06483",
+       "topics": [
+        "Agents",
+        "Reasoning",
+        "Fine-tuning",
+        "Research"
+       ],
+       "links": [
+        {
+         "label": "Code: GaryStack/Rethinking-Agent-RL",
+         "url": "https://github.com/GaryStack/Rethinking-Agent-RL"
+        }
+       ]
+      },
+      {
+       "title": "You don't need long context — frequent compaction loses little or no accuracy",
+       "summary": "Belcak, Muralidharan, Molchanov et al. show later tokens cost up to 7x more than early ones on frontier open-weight models, yet compacting the context often lets models run on short windows with little or no loss on long-horizon and long-input tasks — even SWE tasks with one action per context window. A provocative result for anyone paying for 1M-token agent traces; the paper proposes 'semantic state space models' as the alternative.",
+       "tag": "Confirmed",
+       "source": "arXiv 2611.05306 (3 Nov, trending 5–6 Nov)",
+       "url": "https://arxiv.org/abs/2611.05306",
+       "topics": [
+        "Long context",
+        "Inference",
+        "Agents",
+        "Research"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Should See",
+     "items": [
+      {
+       "title": "FrontierPhysics: evaluating agents on end-to-end physics research",
+       "summary": "56 tasks drawn from 42 physicists' own research, graded by deterministic verifiers plus expert rubrics; across 22 models and 26 configurations none passes more than 46 of 168 rollouts. Failures are attributed to shallow reasoning and missing expert intuition rather than lack of knowledge — a useful sanity check against 'AI scientist' claims.",
+       "tag": "Confirmed",
+       "source": "arXiv 2611.06910 (4 Nov)",
+       "url": "https://arxiv.org/abs/2611.06910",
+       "topics": [
+        "Evals",
+        "Agents",
+        "Research"
+       ]
+      },
+      {
+       "title": "StateBench (Ai2): models collapse when tracking state changes across long documents",
+       "summary": "A four-level benchmark for tracking entities whose values change over a long input, from fixed values up to chained swaps. Frontier models handle the easy levels but degrade sharply as inputs grow, and when trained on the task, recurrent/hybrid architectures (Gated DeltaNet) generalise to far longer sequences than transformers — relevant if your RAG pipeline feeds long, evolving documents.",
+       "tag": "Confirmed",
+       "source": "Hugging Face blog / Ai2 (3 Nov)",
+       "url": "https://huggingface.co/blog/allenai/statebench",
+       "topics": [
+        "Ai2",
+        "Evals",
+        "Long context",
+        "RAG"
+       ],
+       "links": [
+        {
+         "label": "Code: allenai/state-bench",
+         "url": "https://github.com/allenai/state-bench"
+        }
+       ]
+      },
+      {
+       "title": "On-policy distillation can fall below the base model out of distribution",
+       "summary": "Tests single- and multi-teacher on-policy distillation on Qwen3 across math, coding, agent and long-context tasks: OPD matches teachers in-distribution but drops below the base model OOD and trails the best teacher on composed tasks. A warning for the popular 'distil your RL'd checkpoints back into one model' workflow; proposes geometry-based patching and base-preserving replay.",
+       "tag": "Confirmed",
+       "source": "arXiv 2611.05609 (3 Nov)",
+       "url": "https://arxiv.org/abs/2611.05609",
+       "topics": [
+        "Fine-tuning",
+        "Distillation",
+        "Qwen",
+        "Research"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Good To Know",
+     "items": [
+      {
+       "title": "Stabilizing on-policy targeted guidance in agentic RL (Frans, Rush, Levine, Abbeel, Nair)",
+       "summary": "Learns from rich per-turn textual feedback (e.g. rubric-judge comments) via an on-policy self-distillation objective layered on standard RL in a multi-turn SWE environment. The recipe that works: apply the feedback only on failed turns and pair it with per-criterion rewards — useful if you post-train coding agents with LLM-judge feedback.",
+       "tag": "Confirmed",
+       "source": "arXiv 2611.05266 (v2, 4 Nov)",
+       "url": "https://arxiv.org/abs/2611.05266",
+       "topics": [
+        "Agents",
+        "Fine-tuning",
+        "Coding agents",
+        "Research"
+       ]
+      },
+      {
+       "title": "CompressionBench: can your coding agent compress an LLM?",
+       "summary": "Hands a coding agent a checkpoint, a storage budget, an inference environment and a time limit and asks for compressed weights plus working inference code; 29 of 36 agent runs passed verification, with the best averaging +3.4% perplexity vs BF16. Key lesson for autoresearch loops: perplexity-only local evaluation misranks solutions.",
+       "tag": "Confirmed",
+       "source": "arXiv 2611.06858 (4 Nov)",
+       "url": "https://arxiv.org/abs/2611.06858",
+       "topics": [
+        "Coding agents",
+        "Quantization",
+        "Evals",
+        "Research"
+       ]
+      },
+      {
+       "title": "LExMem / LExGraph (MBZUAI): graph-based long-term memory for exploration tasks",
+       "summary": "Argues memory benchmarks test factual recall but miss branching trial-and-error like debugging or research; LExMem models exploration as evolving graphs (224 dialogues, 2,018 QA items). LExGraph stores dialogue as linked memory nodes with hybrid retrieval plus neighbour expansion and beats existing memory systems — code released, and it comes from Abu Dhabi.",
+       "tag": "Confirmed",
+       "source": "arXiv 2611.06414 (4 Nov)",
+       "url": "https://arxiv.org/abs/2611.06414",
+       "topics": [
+        "Agents",
+        "Memory",
+        "RAG",
+        "MBZUAI"
+       ],
+       "links": [
+        {
+         "label": "Code: mbzuai-nlp/LExMem",
+         "url": "https://github.com/mbzuai-nlp/LExMem"
+        }
+       ]
+      },
+      {
+       "title": "The Harness Is the Model: scaffolding changes a fixed LLM's rule compliance, unevenly across models",
+       "summary": "Four open-weight models x five harness designs on 156 pre-registered retail-banking cases: within one model the best-to-worst harness gap is 11.5 points, and 26% of violations came with the agent telling the customer it had NOT done the thing it did. Practical eval lesson: validate the model+harness pair and read action logs, not just transcripts. All 3,120 traces released.",
+       "tag": "Confirmed",
+       "source": "arXiv 2611.06116 (4 Nov)",
+       "url": "https://arxiv.org/abs/2611.06116",
+       "topics": [
+        "Evals",
+        "Agents",
+        "Security",
+        "Research"
+       ],
+       "links": [
+        {
+         "label": "Code & traces",
+         "url": "https://github.com/mhuyut/harness-is-the-model"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "repos",
+   "name": "GitHub Repos",
+   "tiers": [
+    {
+     "name": "Must See",
+     "items": [
+      {
+       "title": "ggml-org/llama.cpp v0.9.0 — FP8 quantization, multi-node tensor parallelism, TTS/ASR",
+       "summary": "First versioned release since v0.8.0 (bundling ggml v0.29.0): OCP FP8 E4M3 quantization as a new GGUF ftype, a flash_attn_ext_rows op that makes the unified KV cache efficient for multi-sequence serving, initial NCCL multi-node tensor parallelism, plus Chatterbox TTS, Nemotron 3.5 Transcribe (offline ASR, 40 languages) and new architectures including Mistral Large 4 and Clover-35B-A3B. Big prefill gains for Gemma 4 E2B/E4B too.",
+       "tag": "Confirmed",
+       "source": "GitHub release (4 Nov)",
+       "url": "https://github.com/ggml-org/llama.cpp/releases/tag/v0.9.0",
+       "topics": [
+        "llama.cpp",
+        "Inference",
+        "Local models",
+        "Release"
+       ],
+       "meta": "C/C++",
+       "note": "Re-quantize a model to F8_E4M3 and benchmark multi-sequence throughput against Q8_0; try llama-tts for a one-binary local speech stack."
+      },
+      {
+       "title": "vercel-labs/agent-desktop — computer use for agents via the OS accessibility tree, no vision model",
+       "summary": "A CLI and C library that reads the accessibility tree on macOS, Windows and Linux and returns a JSON snapshot with stable element refs; agents click/type on refs headlessly and re-snapshot to verify, with ~56 commands covering windows, clipboard and keyboard. Cheaper, faster and resolution-independent compared with screenshot-based computer use — it added ~3.8k stars in a day.",
+       "tag": "Confirmed",
+       "source": "GitHub trending (6 Nov)",
+       "url": "https://github.com/vercel-labs/agent-desktop",
+       "topics": [
+        "Computer use",
+        "Agents",
+        "Vercel",
+        "Open source"
+       ],
+       "meta": "★ ~12k, Rust",
+       "note": "Install via npm, snapshot a desktop app, and wire the CLI in as a tool to automate a GUI-only workflow from your agent."
+      }
+     ]
+    },
+    {
+     "name": "Should See",
+     "items": [
+      {
+       "title": "NVIDIA/auto-ontology — an open 'context layer' for data agents (text-to-SQL grounding)",
+       "summary": "Compiles database metadata into an ontology (business terms to columns, certified SQL measures, join relationships) in Postgres+pgvector; humans certify definitions in a UI, then agents retrieve terms, write SQL, validate against the DB and return answer+SQL+steps via MCP, skills or REST. Connectors for Postgres, MySQL, Databricks, Snowflake, ClickHouse, Trino, DuckDB and SQLite.",
+       "tag": "Confirmed",
+       "source": "GitHub / Hacker News (4–5 Nov)",
+       "url": "https://github.com/NVIDIA/auto-ontology",
+       "topics": [
+        "NVIDIA",
+        "Data pipelines",
+        "Text-to-SQL",
+        "MCP"
+       ],
+       "meta": "★ ~4.4k, Python",
+       "note": "docker compose up, point it at DuckDB or Postgres, certify a few measures, then query it through MCP from Claude or Codex."
+      },
+      {
+       "title": "JustVugg/colibri — hierarchical MoE inference: hot experts on GPU, warm in RAM, cold on NVMe",
+       "summary": "Runs frontier MoEs (GLM-5.x, Kimi K3, DeepSeek V4/V4.1 Flash, Qwen3.8-Flash-Next, MiMo-V2.6) on consumer boxes with no GPU required by streaming experts across tiers, learning the hot set from usage. OpenAI- and Anthropic-compatible APIs, tool calling and speculative decoding; e.g. GLM-5.2 744B at ~1.8 tok/s on a 128 GB Ryzen AI Max box.",
+       "tag": "Confirmed",
+       "source": "GitHub trending (6 Nov)",
+       "url": "https://github.com/JustVugg/colibri",
+       "topics": [
+        "Inference",
+        "Local models",
+        "Open source"
+       ],
+       "meta": "★ ~47k, C",
+       "note": "Run the one-step setup; it picks a model that fits your machine and starts a local OpenAI-compatible server."
+      },
+      {
+       "title": "unslothai/unsloth v0.1.915 — FP8 LoRA, DPO/GRPO on Apple MLX, Qwen3.8-Flash-Next support",
+       "summary": "This week's betas add FP8 LoRA training on 16-bit bases with lower VRAM, DPO/ORPO/KTO/GRPO/CPO running on MLX (Apple silicon), CPU fine-tuning from the Train page, multi-GPU via UNSLOTH_PARALLEL and a ~4x faster single-GPU generation path. Preference optimisation on a Mac is now a realistic hobbyist workflow.",
+       "tag": "Confirmed",
+       "source": "GitHub releases (4 Nov)",
+       "url": "https://github.com/unslothai/unsloth/releases",
+       "topics": [
+        "Unsloth",
+        "Fine-tuning",
+        "Release"
+       ],
+       "meta": "Python",
+       "note": "Run a GRPO or DPO fine-tune on an M-series Mac, or FP8 LoRA on a 16-bit base to cut VRAM."
+      }
+     ]
+    },
+    {
+     "name": "Good To Know",
+     "items": [
+      {
+       "title": "AGGIB/Stroq — a local 'action firewall' and audit log for coding agents",
+       "summary": "PreToolUse/PostToolUse hooks for Claude Code, Cursor, Codex, Copilot CLI and any MCP client: scores everything the agent reads against 599 injection rules, classifies intended actions (shell.network, fs.secrets, git.push_external) against a YAML allow/ask/deny policy, blocks egress of hashed secrets, and writes a hash-chained audit log. 'stroq attack' replays 13 recorded agent-hijack incidents against your policy — timely given the Postman story in News.",
+       "tag": "Confirmed",
+       "source": "Show HN (5 Nov)",
+       "url": "https://github.com/AGGIB/Stroq",
+       "topics": [
+        "Security",
+        "Coding agents",
+        "Open source"
+       ],
+       "meta": "new, TypeScript",
+       "note": "npx @stroq/cli init in a repo you run Claude Code in, then stroq attack to see which replayed incidents your policy blocks."
+      },
+      {
+       "title": "max-sixty/worktrunk — a worktree CLI built for running coding agents in parallel",
+       "summary": "wt switch -c -x claude feat creates a worktree and launches Claude in it; wt merge squashes/rebases/cleans in one step, with hooks, LLM commit messages, per-worktree dev ports and shared build caches. The parallel-agent workflow everyone is converging on, with the merge ergonomics done.",
+       "tag": "Confirmed",
+       "source": "GitHub trending (6 Nov)",
+       "url": "https://github.com/max-sixty/worktrunk",
+       "topics": [
+        "Coding agents",
+        "CLI",
+        "Tooling"
+       ],
+       "meta": "★ ~9k, Rust",
+       "note": "brew install worktrunk, then run two agents on two features in parallel worktrees."
+      },
+      {
+       "title": "D4Vinci/Scrapling — scraping framework with an MCP server and RAG-ready Markdown output",
+       "summary": "HTTP with TLS-fingerprint impersonation, stealth browsers, adaptive CSS/XPath element tracking and Scrapy-like spiders; the AI bits are a built-in MCP server with prompt-injection protections, page.markdown() and a ContentSpider that builds Markdown corpora without an LLM. Web ingestion for RAG without stitching five libraries.",
+       "tag": "Confirmed",
+       "source": "GitHub trending (6 Nov)",
+       "url": "https://github.com/D4Vinci/Scrapling",
+       "topics": [
+        "RAG",
+        "Data pipelines",
+        "MCP",
+        "Python"
+       ],
+       "meta": "★ ~92k, Python",
+       "note": "ContentSpider a docs site to Markdown and feed it straight into your RAG index."
+      },
+      {
+       "title": "Linum-AI/pjit-21k — a 2.2B pixel-space text-to-image model trained for ~$21K, fully open",
+       "summary": "P-JiT skips the VAE and works on 32x32 pixel patches with a frozen Qwen3.5-4B text encoder; 8,415 H100-hours of training plus $690 of post-training, with Apache-2.0 code and weights and a cost breakdown in the field notes. A compact, documented recipe for anyone curious how far a hobby-lab budget goes in 2026.",
+       "tag": "Confirmed",
+       "source": "Show HN / linum.ai (4–6 Nov)",
+       "url": "https://github.com/Linum-AI/pjit-21k",
+       "topics": [
+        "Image models",
+        "Training",
+        "Open weights"
+       ],
+       "meta": "new, Python",
+       "note": "python generate.py on a 24 GB GPU; read the field notes for the cost/throughput breakdown.",
+       "links": [
+        {
+         "label": "Field notes",
+         "url": "https://www.linum.ai/field-notes/pjit-21k"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "news",
+   "name": "News",
+   "tiers": [
+    {
+     "name": "Must See",
+     "items": [
+      {
+       "title": "OpenAI: an agent pipeline found and patched 948 Linux-kernel root vulnerabilities for $1.2M",
+       "summary": "An unreleased cyber model, run as a five-stage agent pipeline (discover, validate in sandboxes, assess, patch, human review), flagged 2,308 candidate bugs, reproduced 1,724 and produced 1,169 working local-privilege-escalation exploits collapsing to 948 distinct flaws — at $1,213,430 in API credits, about $1,279 per exploit, with 10 techniques new to kernel experts. Every finding shipped with a generated patch; 61 are upstream so far. The clearest evidence yet that end-to-end vulnerability research is automatable — and a 'patch now' signal for every Linux box you run.",
+       "tag": "Confirmed",
+       "source": "openai.com (4 Nov); The Hacker News, Help Net Security (5 Nov)",
+       "url": "https://openai.com/index/a-thousand-fewer-paths-to-root/",
+       "topics": [
+        "OpenAI",
+        "Security",
+        "Agents"
+       ],
+       "links": [
+        {
+         "label": "The Hacker News",
+         "url": "https://thehackernews.com/2026/11/openai-ai-pipeline-generates-948-linux.html"
+        },
+        {
+         "label": "Help Net Security",
+         "url": "https://www.helpnetsecurity.com/2026/11/05/openai-linux-kernel-root-exploits/"
+        }
+       ]
+      },
+      {
+       "title": "Meta acquires Conductor, the parallel coding-agent orchestrator — Cloud goes read-only 13 Nov",
+       "summary": "Conductor (run several third-party coding agents in parallel workspaces) is joining Meta Superintelligence Labs; sign-ups stopped 4 Nov, Conductor Cloud becomes read-only on 13 Nov and shuts on 20 Nov with data deletion, and the local app winds down early 2027. Same day, Claude Code's head of product Cat Wu moved to OpenAI and Lamini founder Sharon Zhou left AMD for Anthropic — the coding-agent talent war is visibly intensifying. If you use Conductor, export your data.",
+       "tag": "Confirmed",
+       "source": "conductor.build announcement; TechCrunch (4 Nov)",
+       "url": "https://www.conductor.build/announcement",
+       "topics": [
+        "Meta",
+        "Coding agents",
+        "Acquisition"
+       ],
+       "links": [
+        {
+         "label": "TechCrunch",
+         "url": "https://techcrunch.com/2026/11/04/meta-acquires-ai-coding-startup-conductor/"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Should See",
+     "items": [
+      {
+       "title": "Follow-up: Matthew Honnibal says the 'Astra reads and writes weights to improve Qwen' framing is misleading",
+       "summary": "New since yesterday's Weight-Space Programming item: the spaCy author's critique (1,000+ points on HN) argues the MIT post conflates two things — only the tiny 17K–172K-weight experiments involve reading raw weights with no tools, while the Qwen MATH-500 gain used Python tooling and actually ran the model on practice problems. Latent Space's editors also now say the headline overstated some claims but stand by the replications. Read before citing the result.",
+       "tag": "Confirmed",
+       "source": "honnibal.dev (3 Nov; HN surge 4–5 Nov)",
+       "url": "https://honnibal.dev/blog/astra-read-write-misleading",
+       "topics": [
+        "Interpretability",
+        "Model editing",
+        "Research"
+       ]
+      },
+      {
+       "title": "Postman desktop auto-installs plugins and hooks into Codex, Claude Code, Cursor and Copilot configs",
+       "summary": "A GitHub issue (opened 25 Oct, #1 on HN this week with ~1,500 points) documents Postman v12.3x writing a Postman plugin, a self-approved SessionStart hook and MCP entries into ~/.codex, ~/.claude, Cursor and ~/.copilot settings without clear consent; the hook tells agents to load Postman's skill for 'any non-trivial API engineering task'. No official Postman response in the thread as of 5 Nov. Check your agent configs for entries you didn't add.",
+       "tag": "Confirmed",
+       "source": "GitHub issue postmanlabs/postman-app-support#14370; Hacker News (4–5 Nov)",
+       "url": "https://github.com/postmanlabs/postman-app-support/issues/14370",
+       "topics": [
+        "Security",
+        "Coding agents",
+        "Supply chain"
+       ]
+      },
+      {
+       "title": "Anthropic: Claude helped solve the first 3D structure of a prokaryotic vault particle",
+       "summary": "Using an internal multi-agent harness, Claude searched ~15B predicted proteins for vault homologs, designed constructs, proposed a 90-minute purification replacing a 3-day protocol and set up and ran the cryo-EM pipeline across hundreds of GPUs; 4 of 7 candidates were confirmed. The write-up is candid about failures (a skipped standard step produced a mirror-blended map) — a realistic case study of agentic scientific workflows and where humans had to steer.",
+       "tag": "Confirmed",
+       "source": "anthropic.com/research (4 Nov)",
+       "url": "https://www.anthropic.com/research/investigating-vault-particles-with-claude",
+       "topics": [
+        "Anthropic",
+        "Agents",
+        "Science"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Good To Know",
+     "items": [
+      {
+       "title": "Nvidia RTX Spark laptops run local inference at ~21% of Windows speed on Linux",
+       "summary": "Measurements on the 128 GB unified-memory RTX Spark laptops: GPT-OSS-120B does 65 tok/s on Windows/WSL but 13.9 tok/s on native Linux, because the power-controller firmware table only the Windows driver can decrypt is absent, pinning clocks near 790 MHz vs 2.2 GHz. Workaround is WSL; no Nvidia response yet. If you were eyeing one for local LLM work on Linux, wait.",
+       "tag": "Confirmed",
+       "source": "mindstudio.ai (1 Nov; HN 4–5 Nov)",
+       "url": "https://www.mindstudio.ai/blog/linux-nvidia-rtx-spark-laptop",
+       "topics": [
+        "NVIDIA",
+        "Local models",
+        "Inference",
+        "Hardware"
+       ]
+      },
+      {
+       "title": "Anthropic report: how 207k research sessions actually use Claude — data analysis dominates",
+       "summary": "Privacy-preserving analysis of 207,049 Claude and Claude Code sessions (Aug–Sep 2026) plus a survey of 528 scientists: data analysis is 34–48% of sessions versus 28% of researchers' time, CS is a third of Claude Code sessions, ~40% of scientists expect AI to run full projects by 2030, and modelled acceleration today is 1.35–2.02x. Useful numbers if you're making the case for AI tooling on a data team.",
+       "tag": "Confirmed",
+       "source": "anthropic.com/research (5 Nov)",
+       "url": "https://www.anthropic.com/research/how-researchers-use-claude",
+       "topics": [
+        "Anthropic",
+        "Data science",
+        "Industry"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "models",
+   "name": "Models & Tools",
+   "tiers": [
+    {
+     "name": "Must See",
+     "items": [
+      {
+       "title": "Thinking Machines: Inkling 2 Small — 594B/17B-active MoE, Apache-2.0 weights promised next week",
+       "summary": "Thinking Machines Lab's first big model: a sparse MoE with 17B active parameters, image input, variable effort, RL at 256K context with compaction and up to 1M in pretraining, reporting SWE-Bench Pro v2 Hard 86.3%, DeepSWE 72.1%, MMMU-Pro 81.6% and an Artificial Analysis index of 31. Weights are closed today (fine-tune and sample via Tinker) with a full Apache-2.0 release planned 'next week' after external red-teaming — a frontier-class coding/agent model you could self-host and fine-tune within days.",
+       "tag": "Confirmed",
+       "source": "thinkingmachines.ai (5 Nov)",
+       "url": "https://thinkingmachines.ai/news/inkling-2-small",
+       "topics": [
+        "Thinking Machines",
+        "Open weights",
+        "Model release",
+        "Coding agents"
+       ]
+      },
+      {
+       "title": "OpenAI API: GPT-6-Cyber lands in the changelog (Daybreak trusted-access only)",
+       "summary": "The 5 Nov changelog adds gpt-6-cyber, a GPT-6 Astra derivative for investigating vulnerabilities, reproducing them in authorised test environments and verifying fixes, gated behind the Daybreak programme rather than general API access. Reported claims: ExploitGym 48.5% vs 32.1% for GPT-5.6 Cyber, 81 novel high-severity Firefox bugs found, and it is the model class behind the Linux-kernel pipeline in News. Expect it inside Codex security review for approved orgs.",
+       "tag": "Confirmed",
+       "source": "developers.openai.com changelog (5 Nov); BankInfoSecurity",
+       "url": "https://developers.openai.com/api/docs/changelog",
+       "topics": [
+        "OpenAI",
+        "API",
+        "Security",
+        "Model release"
+       ],
+       "links": [
+        {
+         "label": "BankInfoSecurity",
+         "url": "https://bankinfosecurity.com/openai-unveils-gpt-6-cyber-stronger-exploit-skills-a-33314"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Should See",
+     "items": [
+      {
+       "title": "Claude API: IP allowlisting (beta) and 'sign a member out everywhere' Admin API",
+       "summary": "Organisations can now restrict API requests to up to 1,000 IPv4/IPv6 addresses or CIDR ranges in the Console, so a leaked key is useless off your infrastructure; separately, Enterprise admins get POST /v1/organizations/users/{id}/sign_out (beta header admin-user-sign-out-2026-10-08) to end all sessions, devices and OAuth tokens. The allowlist is the one worth switching on for CI and pipeline keys today.",
+       "tag": "Confirmed",
+       "source": "platform.claude.com release notes (5 Nov)",
+       "url": "https://platform.claude.com/docs/en/release-notes/overview",
+       "topics": [
+        "Anthropic",
+        "API",
+        "Security"
+       ]
+      },
+      {
+       "title": "Axion 1.0-35B (ByteDance): Apache-2.0 agent model with open weights, SFT data and code",
+       "summary": "A 35B-total/3B-active MoE trained for scientific reasoning, information seeking and tool use via a deliberately simple three-stage recipe (~18K SFT examples, then RL over agent trajectories); the reproduction checkpoint scores HLE 52.8, SEAL-0 60.4 and FrontierScience Olympiad 85.0. Rare to get weights, training data and code together at a size you can fine-tune and serve yourself.",
+       "tag": "Confirmed",
+       "source": "Hugging Face model card; arXiv 2611.03233 (4 Nov)",
+       "url": "https://huggingface.co/Axion1-0/Axion-1.0-35B",
+       "topics": [
+        "ByteDance",
+        "Open weights",
+        "Agents",
+        "Model release"
+       ],
+       "links": [
+        {
+         "label": "Paper",
+         "url": "https://arxiv.org/abs/2611.03233"
+        }
+       ]
+      },
+      {
+       "title": "Cursor: Build Live Apps — cloud agents scaffold, host and secure web apps from a description",
+       "summary": "Describe an app and a cloud agent scaffolds it, provisions Postgres if needed, puts auth behind Cursor SSO, runs deterministic and agentic security checks (exposed secrets) and publishes to a chosen domain, shareable to people, groups or the whole team. Cursor is moving from editor to Lovable/Replit-style hosting — handy for shipping internal data dashboards from a prompt. Paid plans with cloud agents enabled.",
+       "tag": "Confirmed",
+       "source": "cursor.com changelog (5 Nov)",
+       "url": "https://www.cursor.com/changelog/build-live-apps",
+       "topics": [
+        "Cursor",
+        "Coding agents",
+        "Tooling"
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Good To Know",
+     "items": [
+      {
+       "title": "Mistral Studio: managed agents, workflow triggers, OpenTelemetry traces, evals and a Mistral MCP server",
+       "summary": "Mistral's enterprise platform now ships managed agents with skills, sandboxes, subagents and hooks, event-triggered resumable workflows with a visual graph, OTel traces across model calls and tool use, dataset-based evals, and an MCP server to build locally with any coding agent and deploy in one command — cloud, VPC or on-prem. The model behind it ('Le Chonk' = Mistral Large 4) is October's release, not new.",
+       "tag": "Confirmed",
+       "source": "mistral.ai/news (5 Nov)",
+       "url": "https://mistral.ai/news/build-with-studio/",
+       "topics": [
+        "Mistral",
+        "Agents",
+        "Enterprise",
+        "MCP"
+       ]
+      },
+      {
+       "title": "nvidia/DeepSeek-V4.1-Flash-1017-NVFP4 — official FP4 checkpoint, now loads natively in SGLang",
+       "summary": "NVIDIA's W4A4 NVFP4 conversion of the current top open model trims it from ~475 GiB to ~400 GiB with essentially flat accuracy versus the MXFP4 source (GPQA-D 92.9 vs 92.8, Terminal-Bench 2.1 81.1 vs 81.8); SGLang loads it natively since 4 Nov, vLLM still needs a PR. Targets Blackwell (tested on 4x GB300).",
+       "tag": "Confirmed",
+       "source": "Hugging Face model card (updated 6 Nov)",
+       "url": "https://huggingface.co/nvidia/DeepSeek-V4.1-Flash-1017-NVFP4",
+       "topics": [
+        "NVIDIA",
+        "DeepSeek",
+        "Inference",
+        "Quantization"
+       ]
+      },
+      {
+       "title": "Watch: Tencent Hy4 weights still not on Hugging Face (as of 6 Nov, 04:30 UTC)",
+       "summary": "Two days after the launch promised weights 'in the coming days', the tencent org still lists only the August Hy4-preview and Hy4-preview-FP8 repos (text-only, 770B/49B-active, Apache-2.0); some sites claiming the weights are 'live' are pointing at that preview. We'll flag it the day the full vision + computer-use model lands.",
+       "tag": "Confirmed",
+       "source": "huggingface.co/tencent (checked 6 Nov)",
+       "url": "https://huggingface.co/tencent",
+       "topics": [
+        "Tencent",
+        "Open weights",
+        "Watchlist"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "voices",
+   "name": "Voices",
+   "tiers": [
+    {
+     "name": "Must See",
+     "items": [
+      {
+       "title": "swyx (Latent Space): AI News — It's Swapping Season",
+       "summary": "The 5 Nov roundup leads with OpenAI's 948-exploit kernel pipeline, then the week's open-weight drops (Kimi K3.1 Pro, Ripple-65B, Hy4) and the title story: Cat Wu Anthropic→OpenAI, Sharon Zhou AMD→Anthropic, Meta buys Conductor, Factory buys HumanLayer, plus Cognition's SWE-2 Flash. The fastest way to see how today's items fit together.",
+       "tag": "Confirmed",
+       "source": "latent.space (5 Nov)",
+       "url": "https://latent.space/p/ainews-it-s-swapping-season/",
+       "topics": [
+        "swyx",
+        "Newsletter",
+        "Roundup"
+       ],
+       "meta": "latent.space (5 Nov)"
+      }
+     ]
+    },
+    {
+     "name": "Should See",
+     "items": [
+      {
+       "title": "swyx (Latent Space): AI News — Behind Latent Space: Kill My SaaS, Jev & AI in 2026 | AIEi Shanghai",
+       "summary": "A quiet-day issue, but with one developer-relevant nugget: the editors acknowledge disputes over their 'Weight Space Programming' headline and say it overstated some claims, while declining to retract because of multiple independent replications. Also covers FlashProve being open-sourced, benchmark audits and quantization tests.",
+       "tag": "Confirmed",
+       "source": "latent.space (4 Nov)",
+       "url": "https://latent.space/p/ainews-behind-latent-space-kill-my-saas-jev-ai-in-2026-aiei-shanghai/",
+       "topics": [
+        "swyx",
+        "Newsletter",
+        "Interpretability"
+       ],
+       "meta": "latent.space (4 Nov)"
+      }
+     ]
+    },
+    {
+     "name": "Good To Know",
+     "items": [
+      {
+       "title": "Simon Willison: llm 0.37.1",
+       "summary": "Bugfix point release for the LLM CLI following the 0.37 release covered earlier this week, credited to four outside contributors; a companion datasette-llm 0.1a10 fixes model restriction in the agent demo. Minor, but worth a pip upgrade if you scripted against 0.37.",
+       "tag": "Confirmed",
+       "source": "simonwillison.net (3 Nov)",
+       "url": "https://simonwillison.net/2026/Nov/3/llm/",
+       "topics": [
+        "Simon Willison",
+        "Tooling",
+        "CLI"
+       ],
+       "meta": "simonwillison.net (3 Nov)"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "learn",
+   "name": "Learn",
+   "tiers": [
+    {
+     "name": "Today's concept",
+     "items": [
+      {
+       "title": "Context compaction — why agents may not need long context after all",
+       "summary": "Context compaction means periodically replacing an agent's accumulated transcript (tool outputs, intermediate reasoning, old turns) with a compressed summary or structured state, so the model keeps working inside a short window instead of dragging a 500K-token history behind every call. Coding agents already do this at the edge of their window; the newer idea is to do it aggressively and often, by design.\n\nIt matters now because the economics are brutal: today's 'You don't need long context' paper measures later tokens costing up to 7x more than early ones on frontier open-weight models (attention over a longer prefix, bigger KV cache), yet finds that frequent compaction loses little or no accuracy on long-horizon and long-input tasks — even SWE tasks with a single action per context window. A related study on reasoning-history compaction shows that rewriting earlier reasoning before tool results arrive shortens later reasoning and cuts agent cost without retraining. Yesterday's MEMENTO paper attacks the same problem by learning the compaction policy.\n\nPractically: log how many tokens your agent spends per step as a function of position, try a summarise-and-restart loop every N tool calls with a structured state object (goal, facts learned, open questions, files touched), and measure task success and cost side by side. StateBench in today's Research tab is a reminder of what gets lost — entities whose values change — so make the state object explicit about current values rather than history.",
+       "topics": [
+        "Long context",
+        "Agents",
+        "Inference",
+        "Memory"
+       ],
+       "links": [
+        {
+         "label": "You don't need long context (arXiv 2611.05306)",
+         "url": "https://arxiv.org/abs/2611.05306"
+        },
+        {
+         "label": "Causal effects of reasoning-history compaction (arXiv 2611.03852)",
+         "url": "https://arxiv.org/abs/2611.03852"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "footer": "Sources checked this run: Hugging Face papers/models/blog, arXiv cs.CL/cs.LG/cs.AI new listings, alphaXiv, GitHub trending and releases (release pages were stale via cache; versions cross-checked against release trackers and tag pages), Hacker News, Latent Space AI News (news.smol.ai), Anthropic research, OpenAI API changelog, Claude release notes, Gemini API changelog (no new entries since 30 Oct), Thinking Machines, Mistral, Cursor, Conductor, The Hacker News, Help Net Security, TechCrunch (article pages). Not reachable: openai.com posts and news index, The Verge, Ars Technica, Reuters, Bloomberg, Business Insider, blog.google (no dated posts), github.com/trending/python (stale snapshot). Star counts are approximate at build time. Voices checked with nothing new in the last 3 days: Andrej Karpathy, Sebastian Raschka, Lilian Weng, Nathan Lambert, Jack Clark, Chip Huyen, Eugene Yan, Hamel Husain, Jay Alammar, Andrew Ng (Issue 378 not yet out), Ethan Mollick, Jim Fan (static site, no blog), Dwarkesh Patel."
+}
