@@ -96,11 +96,10 @@ function renderItem(it, date, tab, f, size) {
     `<a class="topic ${f.topic.toLowerCase() === t.toLowerCase() ? 'on' : ''}" href="${buildHash(date, tab, {...f, topic: f.topic.toLowerCase() === t.toLowerCase() ? '' : t})}">${esc(t)}</a>`).join('');
   const saved = isSaved(it);
   return `<div class="card ${size || ''}" data-key="${esc(itemKey(it))}" data-ctx='${esc(JSON.stringify({date}))}'>
-    <button class="save ${saved ? 'on' : ''}" type="button" aria-pressed="${saved}" title="${saved ? 'Remove from saved' : 'Save for later'}">${saved ? 'Saved' : 'Save'}</button>
     <h3>${md(it.title)}${it.meta ? `<span class="meta">${esc(it.meta)}</span>` : ''}</h3>
     ${it.summary ? `<p>${md(it.summary)}</p>` : ''}
     ${it.note ? `<p class="note"><strong>What you can do:</strong> ${md(it.note)}</p>` : ''}
-    <div class="row">${tag}${it.source ? `<span>${esc(it.source)}</span>` : ''}${open}${links}<span class="topics">${topics}</span></div>
+    <div class="row">${tag}${it.source ? `<span>${esc(it.source)}</span>` : ''}${open}${links}<button class="save ${saved ? 'on' : ''}" type="button" aria-pressed="${saved}" title="${saved ? 'Remove from saved' : 'Save for later'}">${saved ? 'Saved' : 'Save'}</button><span class="topics">${topics}</span></div>
   </div>`;
 }
 
