@@ -11,6 +11,12 @@
    "kind": "daily",
    "title": "AI Brief — Friday, 6 November 2026",
    "summary": "Security and open weights dominate: OpenAI's agent pipeline wrote 948 working Linux-kernel root exploits (and patches) for $1.2M and GPT-6-Cyber hit the API, Thinking Machines unveiled Inkling 2 Small with Apache-2.0 weights promised next week, llama.cpp shipped v0.9.0 with FP8, and two papers argue agents don't need long context or extra turns as much as you think."
+  },
+  {
+   "date": "2026-11-07",
+   "kind": "daily",
+   "title": "AI Brief — Saturday, 7 November 2026",
+   "summary": "A quieter Saturday led by METR's independent finding that AI is roughly doubling Anthropic's R&D pace, Google's Gemini Omni 1.2 Flash video model going GA, Baidu open-sourcing the ERNIE 5.5 Flash base model, and two agent papers showing 40–90% of tokens can be cut without hurting results."
   }
  ]
 }

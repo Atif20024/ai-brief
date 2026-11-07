@@ -76,3 +76,31 @@ One line per item already posted: `YYYY-MM-DD | title | url`. The task appends h
 2026-11-06 | swyx (Latent Space): AI News — It's Swapping Season | https://latent.space/p/ainews-it-s-swapping-season/
 2026-11-06 | swyx (Latent Space): AI News — Behind Latent Space: Kill My SaaS, Jev & AI in 2026 | AIEi Shanghai | https://latent.space/p/ainews-behind-latent-space-kill-my-saas-jev-ai-in-2026-aiei-shanghai/
 2026-11-06 | Simon Willison: llm 0.37.1 | https://simonwillison.net/2026/Nov/3/llm/
+2026-11-07 | How Do AI Agents Waste Your Money? A token-level map of agent waste | https://arxiv.org/abs/2611.07238
+2026-11-07 | The Memory Trap: agents overgeneralize from benign memories | https://arxiv.org/abs/2611.07554
+2026-11-07 | Tools Need Not Speak in Text: latent context compression for agents | https://arxiv.org/abs/2611.06500
+2026-11-07 | Hugging Face: The Ultimate MoE Training Handbook | https://huggingface.co/spaces/huggingface/moe-blogpost
+2026-11-07 | Signed but Steerable: signed RAG packs can still carry poisoned vectors | https://arxiv.org/abs/2611.06498
+2026-11-07 | SAE Interprets MoE: experts specialise much more finely than routing stats suggest | https://arxiv.org/abs/2611.08089
+2026-11-07 | Harness-S: training agents with sibling harnesses | https://arxiv.org/abs/2611.04277
+2026-11-07 | CORE: coarse-to-fine search with context management for deep research | https://arxiv.org/abs/2611.07859
+2026-11-07 | Stress-testing chain-of-thought monitors against covert misalignment | https://arxiv.org/abs/2611.07586
+2026-11-07 | zalando-incubator/agentic-identity-broker — OAuth delegation and consent for AI agents | https://github.com/zalando-incubator/agentic-identity-broker
+2026-11-07 | dsx-ai-factory/nvke — NVIDIA Kubernetes Engine for bare-metal GPU clusters | https://github.com/dsx-ai-factory/nvke
+2026-11-07 | Bytedance-Seed/SAE-Interprets-MoE — code and SAEs behind the MoE interpretability paper | https://github.com/Bytedance-Seed/SAE-Interprets-MoE
+2026-11-07 | DeepExperience/Harness-S — sibling-harness RL recipes for agents | https://github.com/DeepExperience/Harness-S
+2026-11-07 | securagenai/signed-but-steerable — RAG vector-integrity attack and verifier | https://github.com/securagenai/signed-but-steerable
+2026-11-07 | crgregersen/m10dis — Qwen3.8-Flash-Next on one RTX 3070 Ti plus 24 old Maxwell GPUs | https://github.com/crgregersen/m10dis
+2026-11-07 | METR: AI is roughly doubling Anthropic's R&D pace — but most evidence is redacted | https://metr.org/blog/2026-11-05-anthropic-ai-rd-acceleration-assessment/
+2026-11-07 | Anthropic IPO: buyers now float a $1–1.3T valuation, down from ~$2T | https://finance.yahoo.com/technology/article/anthropics-ipo-valuation-could-plunge-to-near-1-trillion-amid-market-turmoil-153332732.html
+2026-11-07 | Perplexity launches Teammates — long-running work agents in Slack | https://www.perplexity.ai/en-GB/hub/blog/teammates-are-agents-for-complex-ongoing-work
+2026-11-07 | Hightouch: a cheap decision model + Opus escalation matches Opus at ~4x lower cost | https://hightouch.com/blog/llm-judges-identity-resolution
+2026-11-07 | Google: Gemini Omni 1.2 Flash video model is generally available | https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemini-omni-1-2-flash/
+2026-11-07 | Baidu open-sources ERNIE 5.5 Flash Base — 280B MoE, 14B active, 1M context | https://huggingface.co/baidu/ERNIE-5.5-Flash-Base-BF16
+2026-11-07 | Viggle Remake — open 20B video-to-video model with an MCP server | https://huggingface.co/Viggle/Viggle-Remake
+2026-11-07 | Andrew Ng (The Batch): Issue 378 — Gemini 4 Carbon, what Anthropic's IPO means for developers | https://www.deeplearning.ai/the-batch/issue-378
+2026-11-07 | swyx (Latent Space): AI News — Anthropic IPO: Whither Now? | https://latent.space/p/ainews-anthropic-ipo-whither-now/
+2026-11-07 | swyx (Latent Space): AI News — Inkling 2 Small: 17A-594B trained in 68 hours on 12T tokens | https://latent.space/p/ainews-inkling-2-small-17a-594b-trained-in-68-hours-on-12t-tokens-beating-muse-spark/
+2026-11-07 | swyx (Latent Space): Controlling Biology — Fabian Theis, Helmholtz Munich | https://latent.space/p/controlling-biology-fabian-theis-helmholtz-munich/
+2026-11-07 | Simon Willison: quoting Nilay Patel on 'Big Tech lost big in the 2026 election' | https://simonwillison.net/2026/Nov/6/nilay-patel/
+2026-11-07 | Simon Willison: quoting Paul Ford, 'The Web Is More Than Enough' | https://simonwillison.net/2026/Nov/5/paul-ford/
