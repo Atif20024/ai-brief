@@ -104,3 +104,38 @@ One line per item already posted: `YYYY-MM-DD | title | url`. The task appends h
 2026-11-07 | swyx (Latent Space): Controlling Biology — Fabian Theis, Helmholtz Munich | https://latent.space/p/controlling-biology-fabian-theis-helmholtz-munich/
 2026-11-07 | Simon Willison: quoting Nilay Patel on 'Big Tech lost big in the 2026 election' | https://simonwillison.net/2026/Nov/6/nilay-patel/
 2026-11-07 | Simon Willison: quoting Paul Ford, 'The Web Is More Than Enough' | https://simonwillison.net/2026/Nov/5/paul-ford/
+2026-11-08 | Anthropic: The components of agent memory — a four-layer architecture with numbers | https://www.anthropic.com/research/components-of-agent-memory
+2026-11-08 | SemiAnalysis GDPx: frontier agents complete ~12% of real economically valuable tasks | https://newsletter.semianalysis.com/p/gdpx-measuring-frontier-model-capabilities
+2026-11-08 | LeanGuard and Caper: verify the tool call before it runs | https://huggingface.co/papers/2611.02332
+2026-11-08 | Agents optimising inference stacks: SpecPilot (10.9x speculative decoding) vs ServerBench (agents build vLLM rivals in 8 hours) | https://huggingface.co/papers/2611.02501
+2026-11-08 | Identically trained models break on different jailbreaks — your red-team results measure a seed | https://huggingface.co/papers/2610.34074
+2026-11-08 | Google: 'Agent Distraction' — coding agents chase stale TODO comments at +77% tokens | https://developers.googleblog.com/agent-distraction/
+2026-11-08 | Hugging Face / Collinear: CWE-bench v2 — find-and-fix security tasks on real repos | https://huggingface.co/blog/cwe-bench
+2026-11-08 | BestRand (CMU): cheap, stable benchmark subsets for CI-style model regression | https://huggingface.co/papers/2611.00883
+2026-11-08 | unlap-labs/maxxbench — detects 'benchmaxxing' by perturbing DeepSWE tasks | https://github.com/unlap-labs/maxxbench
+2026-11-08 | emanuele-em/kanzo and max-sixty/worktrunk — the parallel-agent workflow tooling | https://github.com/emanuele-em/kanzo
+2026-11-08 | rivet-dev/rivet — durable stateful 'Actors' for long-running agents | https://github.com/rivet-dev/rivet
+2026-11-08 | N1nEmAn/sapper-v2 — multi-agent autonomous pentest harness | https://github.com/N1nEmAn/sapper-v2
+2026-11-08 | Sandflow-ai/sand3d and voyager-so/vork — 3D and rendering APIs designed for LLMs | https://github.com/Sandflow-ai/sand3d
+2026-11-08 | Anthropic's IPO: S-1/A filed Monday, valuation talk down to $1.1–1.3T by Friday | https://www.sec.gov/Archives/edgar/data/2130357/000162828026068676/anthropicpbc-sx1ax1.htm
+2026-11-08 | Your dev tools leaked: Claude Code sent your account email to websites; Postman says it will fix its silent plugin installs | https://github.com/anthropics/claude-code/issues/107757
+2026-11-08 | OpenAI: GPT-6 Astra covertly underperforms on safety-research tasks | https://alignment.openai.com/misalignment-reports/covert-underperformance-on-safety-research-tasks/
+2026-11-08 | Money: OpenAI closes ~$11B at $1.25T, fal raises $1.3B at $16B, Palo Alto eyes agent-security startup Clutch for $500M | https://techcrunch.com/2026/11/06/openai-reportedly-raises-an-additional-11-billion-at-a-1-25-trillion-valuation/
+2026-11-08 | US midterms: data centres lost 44 of 45 local referendums; Democrats take Congress on a regulate-AI platform | https://www.opb.org/article/2026/11/06/ai-data-centers-took-a-beating-in-the-midterm-elections-a-reckoning-may-be-ahead-for-tech-giants/
+2026-11-08 | John Langford: the end of Microsoft Research's AI Frontiers group | https://hunch.net/?p=13764006
+2026-11-08 | Nvidia and China: 600k H200s stuck in Hong Kong, a 51%-outside-China rule for cloud buyers, and a House briefing request | https://www.ajot.com/news/exclusive-nvidia-chips-pile-up-in-hong-kong-as-china-withholds-import-approval
+2026-11-08 | Revolut self-hosts GLM-5.3 on 56 B200s and says it cut coding-assistant costs ~90% versus Claude | https://www.theregister.com/ai-and-ml/2026/11/03/british-fintech-revolut-slashes-ai-coding-costs-10x-by-cutting-out-claude-and-going-self-hosted/5307345
+2026-11-08 | Censys: 800+ exposed, passwordless deployments of Artex, the open-source agentic pentest framework | https://techcrunch.com/2026/11/06/hundreds-of-artex-ai-hacking-tools-found-publicly-exposed-to-the-web/
+2026-11-08 | Google will let K-12 schools disable Gemini — but not without losing Search | https://techcrunch.com/2026/11/03/google-will-let-schools-disable-its-ai-tools-but-not-without-sacrificing-search/
+2026-11-08 | Cognition SWE-2 Flash — Inkling-Small post-trained into a coding agent at a fifth of SWE-2's price | https://cognition.com/blog/swe-2-flash
+2026-11-08 | pydantic-ai v2.66.0 — security release: eight advisories and an MCP credential leak in v2.57–2.60 | https://github.com/pydantic/pydantic-ai/releases/tag/v2.66.0
+2026-11-08 | Claude Code 2.1.317–2.1.319 — email privacy check, `denyInsteadOfPrompting`, background MCP calls | https://github.com/anthropics/claude-code/releases
+2026-11-08 | Breaking-ish: Ollama 0.40.14 stops overriding model sampler defaults; LiteLLM 1.108 changes token counting and fallback access | https://github.com/ollama/ollama/releases
+2026-11-08 | Nous Research Arete-27B — SFT alone cuts 'propaganda' output from 22% to 0.9% on Qwen3.8-27B | https://huggingface.co/NousResearch/Arete-27B
+2026-11-08 | Artificial Analysis Endpoint Accuracy Index v1.1 — nearly 1 in 4 serverless open-model endpoints score below the self-hosted reference | https://artificialanalysis.ai/methodology/endpoint-accuracy-index
+2026-11-08 | Google Developers: route coding tasks with a cheap structured classifier — 34/34 held-out vs 70.6% for keyword heuristics | https://developers.googleblog.com/cost-per-task-using-cheap-classifiers-to-route-across-gemini-models-and-thinking-levels/
+2026-11-08 | Small and specialised: LiquidAI LFM3-1.7B (256K hybrid), SenseNova-Loop-9B (looped layers), Baidu Unlimited-OCR-2 (constant-cost doc parsing) | https://huggingface.co/baidu/Unlimited-OCR-2
+2026-11-08 | Dwarkesh Patel: The benchmark where AIs have to lie to win | https://www.dwarkesh.com/p/clocktower
+2026-11-08 | Simon Willison: datasette-apps 0.3a0 — approval gates on agent-built apps | https://simonwillison.net/2026/Nov/4/datasette-apps/
+2026-11-08 | Simon Willison: Datasette #3046 — don't serve Link: rel=next headers to Firefox | https://simonwillison.net/2026/Nov/7/link-rel-next/
+2026-11-08 | Simon Willison: a sound that leaks your exact location | https://simonwillison.net/2026/Nov/3/a-sound-that-leaks-your-exact-location/

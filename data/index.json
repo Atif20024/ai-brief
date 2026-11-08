@@ -17,6 +17,12 @@
    "kind": "daily",
    "title": "AI Brief — Saturday, 7 November 2026",
    "summary": "A quieter Saturday led by METR's independent finding that AI is roughly doubling Anthropic's R&D pace, Google's Gemini Omni 1.2 Flash video model going GA, Baidu open-sourcing the ERNIE 5.5 Flash base model, and two agent papers showing 40–90% of tokens can be cut without hurting results."
+  },
+  {
+   "date": "2026-11-08",
+   "kind": "weekly",
+   "title": "AI Weekly — week of 2 Nov to 7 Nov 2026",
+   "summary": "The week the harness mattered more than the model: a run of papers and an Anthropic engineering post showed that scaffolding, memory and context hygiene decide agent quality and cost, while OpenAI's 948 kernel exploits and your own dev tools (Postman, Claude Code) made agent security personal — all against a backdrop of open-weight drops (Kimi K3.1 Pro, Ripple-65B, ERNIE 5.5) and an Anthropic IPO getting cheaper by the day."
   }
  ]
 }
